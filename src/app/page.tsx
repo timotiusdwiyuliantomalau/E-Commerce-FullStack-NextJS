@@ -1,23 +1,19 @@
 "use client";
 
-import { dataProducts } from "../../utils/fetchData";
-import Atas from "./components/fragments/Homepage/atas";
-import Main from "./components/fragments/main";
+import AtasHomepage from "./components/fragments/Homepage/atas";
+import TengahHomepage from "./components/fragments/Homepage/tengah";
 import Navbar from "./components/fragments/navbar";
 
 export default function Home() {
-  dataProducts(async (response: any) => {
-    console.log(await response);
-    if (!response) return false;
-    response.then((data: any) => {
-      localStorage.setItem("products", JSON.stringify(data.data));
-    });
-  });
+  const styleHome = "pl-12 flex flex-col gap-20";
   return (
     <>
       <div>
         <Navbar></Navbar>
-        <Atas></Atas>
+        <div className="grid gap-20">
+        <AtasHomepage homeClassName={styleHome}></AtasHomepage>
+        <TengahHomepage homeClassName={styleHome}></TengahHomepage>
+        </div>
       </div>
     </>
   );

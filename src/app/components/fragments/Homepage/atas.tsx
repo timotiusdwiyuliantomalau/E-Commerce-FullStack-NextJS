@@ -1,10 +1,10 @@
 import Image from "next/image";
 
-export default function Atas() {
+export default function AtasHomepage(homeClassName:any) {
   return (
     <>
       <div className="flex justify-center mt-[5.5rem]">
-        <div className="flex flex-col items-center w-[85rem] gap-20 pl-12">
+        <div className={`flex flex-col items-center w-[85rem] ${homeClassName.homeClassName}`}>
           <main className="flex bg-gradient-to-r from-[#FF204E] to-white justify-between items-center pr-[13rem] pl-[5rem] w-full h-[20rem] rounded-lg relative">
             <span className="flex flex-col">
               <h1 className="text-7xl font-semibold text-black">DISKON 50%</h1>
@@ -113,7 +113,7 @@ export default function Atas() {
             </div>
             <div>
               <div className="flex gap-10">
-                <div className="w-[17rem] h-[20rem] shadow-xl flex flex-col">
+                <div className="w-[17rem] h-[20rem] shadow-md flex flex-col">
                   <Image
                     className="h-48 w-full object-cover mx-auto"
                     src="/images/diskon_sepatu.png"
@@ -137,7 +137,7 @@ export default function Atas() {
                     </span>
                   </div>
                 </div>
-                <div className="w-[17rem] h-[20rem] shadow-xl flex flex-col">
+                <div className="w-[17rem] h-[20rem] shadow-md flex flex-col">
                   <Image
                     className="h-48 w-full object-cover mx-auto"
                     src="/images/diskon_sepatu.png"
@@ -161,7 +161,7 @@ export default function Atas() {
                     </span>
                   </div>
                 </div>
-                <div className="w-[17rem] h-[20rem] shadow-xl flex flex-col">
+                <div className="w-[17rem] h-[20rem] shadow-md flex flex-col">
                   <Image
                     className="h-48 w-full object-cover mx-auto"
                     src="/images/diskon_sepatu.png"
@@ -187,57 +187,6 @@ export default function Atas() {
                 </div>
                 
               </div>
-            </div>
-          </main>
-          <main className="w-full flex flex-col gap-5">
-            <h1 className="text-left text-2xl font-semibold w-full">
-              Lagi trending nih
-            </h1>
-            <div className="flex gap-4 flex-wrap">
-              <span className="w-[18rem] h-[7rem]  flex gap-5 items-center rounded-lg">
-                <Image src="/images/diskon_sepatu.png" alt="Diskon Sepatu" width={100} height={100} className="bg-red-600 w-28 h-full block rounded-lg"></Image>
-                <span className="flex flex-col gap-2">
-                  <h1 className="font-bold">Nike Shoes</h1>
-                  <p className="">12.6rb terjual</p>
-                </span>
-              </span>
-              <span className="w-[18rem] h-[7rem]  flex gap-5 items-center rounded-lg">
-                <Image src="/images/diskon_sepatu.png" alt="Diskon Sepatu" width={100} height={100} className="bg-red-600 w-28 h-full block rounded-lg"></Image>
-                <span className="flex flex-col gap-2">
-                  <h1 className="font-bold">Nike Shoes</h1>
-                  <p className="">12.6rb terjual</p>
-                </span>
-              </span>
-              <span className="w-[18rem] h-[7rem]  flex gap-5 items-center rounded-lg">
-                <Image src="/images/diskon_sepatu.png" alt="Diskon Sepatu" width={100} height={100} className="bg-red-600 w-28 h-full block rounded-lg"></Image>
-                <span className="flex flex-col gap-2">
-                  <h1 className="font-bold">Nike Shoes</h1>
-                  <p className="">12.6rb terjual</p>
-                </span>
-              </span>
-            </div>
-          </main>
-          <main className="w-full">
-            <h1 className="text-left text-2xl font-semibold w-full mb-7">
-              For You
-            </h1>
-            <div className="">
-              <span className="flex w-[18rem] h-[18rem] bg-green-500 flex-col justify-between rounded-lg border-2 border-gray-300 ">
-                <Image
-                  className="w-full h-full bg-white rounded-lg rounded-br-3xl"
-                  src="/images/kategori_topi.png"
-                  alt="topi"
-                  width={500}
-                  height={500}
-                ></Image>
-                <h3>Topi Keren</h3>
-                {/* <p>Rp 500.0000</p>
-                <span className="flex gap-3">
-                  <span>Rating</span>
-                  <span>|</span>
-                  <span>30K terjual</span>
-                </span> */}
-              </span>
             </div>
           </main>
         </div>
