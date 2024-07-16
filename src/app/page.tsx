@@ -1,16 +1,16 @@
 "use client";
 
-import AtasHomepage from "./components/fragments/Homepage/atas";
-import TengahHomepage from "./components/fragments/Homepage/tengah";
+import AtasHomepage from "./components/Homepage/atas";
+import TengahHomepage from "./components/Homepage/tengah";
 import Navbar from "./components/fragments/navbar";
 
 export default function Home() {
-  const styleHome = "pl-12 flex flex-col gap-20";
+  const styleHome = "pl-20 flex flex-col gap-20";
   return (
     <>
       <div>
         <Navbar></Navbar>
-        <div className="grid gap-20">
+        <div className="grid gap-28">
         <AtasHomepage homeClassName={styleHome}></AtasHomepage>
         <TengahHomepage homeClassName={styleHome}></TengahHomepage>
         </div>
