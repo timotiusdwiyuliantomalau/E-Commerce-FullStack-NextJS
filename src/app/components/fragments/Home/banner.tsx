@@ -1,33 +1,29 @@
 import Image from "next/image";
+import { Banner1, Banner2, Banner3 } from "../content/homepage/sampleBanner";
+import React, { useEffect, useState } from "react";
 
 export default function Banner() {
+  const banners = [<Banner1 />, <Banner2 />, <Banner3 />];
+  const [banner, setBanner] = useState(Array);
+  let [num, setNum] = useState(0);
+  const [aksi, setAksi] = useState(Array);
+  const numBanner = React.useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    setInterval(() => {
+      if (num === banners.length-1) {
+        setNum(0);
+      } else {
+        setNum(num+1);
+      }
+    }, 3000);
+  }, [num]);
+
+  useEffect(() => {
+    setBanner([banners[num]]);
+  }, [num]);
   return (
     <>
-      <main className="flex bg-gradient-to-r from-[#FF204E] to-white justify-between items-center pr-[13rem] pl-[5rem] w-full h-[20rem] rounded-lg relative">
-        <span className="flex flex-col">
-          <h1 className="text-7xl font-semibold text-black">DISKON 50%</h1>
-          <h2 className="text-4xl font-medium text-white w-[30rem]">
-            Nike Air Jordan Jumpman MVP Toronto Raptors
-          </h2>
-          <button className="p-2 rounded-full bg-[#00224D] text-xl  text-white w-40 mt-12">
-            Jelajahi
-          </button>
-        </span>
-        <Image
-          className="w-[7rem] left-[45rem] top-7 absolute"
-          src="/images/top_quality.png"
-          alt="Top Quality"
-          width={500}
-          height={500}
-        ></Image>
-        <Image
-          className="w-[25rem]"
-          src="/images/diskon_sepatu.png"
-          alt="Image Discount"
-          width={500}
-          height={500}
-        ></Image>
-      </main>
+      {banner[0]}
     </>
   );
 }
