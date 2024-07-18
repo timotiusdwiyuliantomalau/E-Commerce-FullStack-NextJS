@@ -4,25 +4,49 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "encrypted-tbn0.gstatic.com",
+        hostname: "*",
         port: "",
         pathname: "/**",
       },
       {
         protocol: "https",
-        hostname: "encrypted-tbn1.gstatic.com",
+        hostname: "placeimg.com",
         port: "",
         pathname: "/**",
       },
       {
         protocol: "https",
-        hostname: "encrypted-tbn2.gstatic.com",
+        hostname: "picsum.photos",
         port: "",
         pathname: "/**",
       },
       {
         protocol: "https",
-        hostname: "encrypted-tbn3.gstatic.com",
+        hostname: "i.pravatar.cc",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "pixabay.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "imgs.search.brave.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "api.lorem.space",
         port: "",
         pathname: "/**",
       },

@@ -6,24 +6,26 @@ export default function Banner() {
   const banners = [<Banner1 />, <Banner2 />, <Banner3 />];
   const [banner, setBanner] = useState(Array);
   let [num, setNum] = useState(0);
-  const [aksi, setAksi] = useState(Array);
-  const numBanner = React.useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    setInterval(() => {
-      if (num === banners.length-1) {
-        setNum(0);
-      } else {
-        setNum(num+1);
-      }
-    }, 3000);
-  }, [num]);
+  const [aksi, setAksi] = useState("");
+  let number = 0;
+  // useEffect(() => {
+  //   console.log(banners[0].type.name);
+  //   setInterval(() => {
+  //     if (number != 2) {
+  //       number += 0.5;
+  //       console.log(number);
+  //       setBanner([banners[number]]);
+  //     } else {
+  //       console.log(number);
+  //       number=-0.5;
+  //     }
+  //   }, 4000);
+  // }, []);
 
-  useEffect(() => {
-    setBanner([banners[num]]);
-  }, [num]);
   return (
     <>
-      {banner[0]}
+      {banner[0] ?? banners[0]}
+      <p>{aksi}</p>
     </>
   );
 }

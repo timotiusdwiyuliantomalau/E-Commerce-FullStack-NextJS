@@ -7,7 +7,6 @@ export default function KejarDiskon() {
   const [time, setTime] = useState(0);
   const countdownAnimate = React.useRef<HTMLInputElement>(null);
   const barDiscount = React.useRef<HTMLInputElement>(null);
-  let interval = 0;
   const hour = time / 1000 / 3600;
   const min = time / 1000 / 60;
   const sec = (time % (1000 * 60)) / 1000;
