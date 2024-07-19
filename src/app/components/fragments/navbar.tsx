@@ -8,7 +8,7 @@ return(
     <div className="fixed flex w-full top-0 justify-between px-12 py-4 items-center bg-white z-10">
         <div className="flex gap-8 items-center">
         <Link className="font-bold text-3xl" href="">SHOPin.</Link>
-        <Link className="font-medium" href="">Kategori</Link>
+        <Link className="font-medium text-lg" href="">Kategori</Link>
         </div>
         <span className="flex relative w-[35rem]">
         <Search className="w-15 absolute text-gray-400 top-1/2 -translate-y-1/2 left-3"></Search>

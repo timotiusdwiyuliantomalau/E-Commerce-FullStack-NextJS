@@ -9,17 +9,14 @@ export default function Banner() {
   const [aksi, setAksi] = useState("");
   let number = 0;
   // useEffect(() => {
-  //   console.log(banners[0].type.name);
   //   setInterval(() => {
   //     if (number != 2) {
   //       number += 0.5;
-  //       console.log(number);
   //       setBanner([banners[number]]);
   //     } else {
-  //       console.log(number);
   //       number=-0.5;
   //     }
-  //   }, 4000);
+  //   }, 2000);
   // }, []);
 
   return (
