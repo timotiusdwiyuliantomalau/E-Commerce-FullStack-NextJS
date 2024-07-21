@@ -23,7 +23,7 @@ export default function ForYou() {
                   className="flex flex-col rounded-lg  w-[13rem] h-[25rem] border-2 border-gray-200 shadow-md cursor-pointer group"
                 >
                   <Image
-                    className="h-[13rem] group rounded-lg rounded-br-[2.5em] bg-blue-900"
+                    className="h-[13rem] group rounded-lg rounded-br-[2.5em] bg-blue-900 object-cover object-center"
                     src={product.product_photos[0]}
                     alt={`Gambar ${index + 1}`}
                     width={300}
