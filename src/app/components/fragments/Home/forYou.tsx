@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { BsFillStarFill } from "react-icons/bs";
 export default function ForYou() {
   const [allProduct, setAllProduct] = React.useState<any>([]);
   const arrProducts =
@@ -45,7 +46,7 @@ export default function ForYou() {
                       {product.offer.store_name}
                     </p>
                     <span className="flex gap-1  text-gray-600 text-lg">
-                      <span>{product.product_rating}</span>
+                      <span> <BsFillStarFill className="text-yellow-500 inline"/> {product.product_rating}</span>
                       <span>|</span>
                       <span>{product.product_num_reviews} terjual</span>
                     </span>

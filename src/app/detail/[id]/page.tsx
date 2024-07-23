@@ -27,8 +27,8 @@ export default function DetailProduct(props: any) {
   return (
     <>
       <Navbar />;
-      <div className="mt-[5rem] justify-center flex bg-purple-600">
-        <main className=" bg-red-300 fixed left-0">
+      <div className="mt-[5rem] justify-center flex">
+        <main className=" fixed left-0">
           <Image
             className="w-full h-[20rem] object-cover object-center rounded-lg"
             src={product.product_photos[0]}
@@ -92,7 +92,7 @@ export default function DetailProduct(props: any) {
               </span>
             </span>
             <p>5(23)</p>
-            <p>12 menit diproses</p>
+            <p>20 menit yang lalu</p>
           </div>
 
           <div>
