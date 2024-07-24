@@ -2,6 +2,7 @@
 
 import Navbar from "@/app/components/fragments/navbar";
 import Image from "next/image";
+import { useEffect } from "react";
 import { Edit2, MinusCircle, PlusCircle, Star } from "react-feather";
 import { BsFillStarFill } from "react-icons/bs";
 
@@ -23,41 +24,46 @@ export default function DetailProduct(props: any) {
           </span>
         )
     );
+    // useEffect(()=>{
+    //   window.addEventListener("click",(e)=>{
+    //     console.log(e.target?.style.);
+    //   })
+    // },[])
 
   return (
     <>
       <Navbar />;
-      <div className="mt-[5rem] justify-center flex">
-        <main className=" fixed left-0">
-          <Image
-            className="w-full h-[20rem] object-cover object-center rounded-lg"
-            src={product.product_photos[0]}
-            alt="Gambar Produk"
-            width={300}
-            height={300}
-          ></Image>
-          <span className="flex gap-3 w-[20rem] mt-3 overflow-x-scroll">
-            {product.product_photos.map((url: any, i: number) => (
-              <Image
-                className="h-[4rem] w-[4rem] object-cover object-center rounded-lg cursor-pointer"
-                key={i}
-                src={url}
-                alt="Gambar Produk"
-                width={300}
-                height={300}
-              ></Image>
-            ))}
-          </span>
-          <h2>ULASAN PEMBELI</h2>
-          <p>5.0</p>
-          <p>99% pembeli merasa puas</p>
-          <p>200 rating . {product.product_num_reviews}</p>
+      <div className="mt-[5rem] justify-center flex ">
+        <main className=" fixed left-0 w-[22rem] ml-[2rem]">
+          <div className="">
+            <Image
+              className="w-full h-[22rem] object-cover object-center rounded-lg"
+              src={product.product_photos[0]}
+              alt="Gambar Produk"
+              width={300}
+              height={300}
+            ></Image>
+            <span className="flex gap-3 w-full mt-3 overflow-x-scroll">
+              {product.product_photos.map((url: any, i: number) => (
+                <Image
+                  className="h-[4rem] w-[4rem] object-cover object-center rounded-lg cursor-pointer"
+                  key={i}
+                  src={url}
+                  alt={i.toString()}
+                  width={300}
+                  height={300}
+                ></Image>
+              ))}
+            </span>
+            <h2>ULASAN PEMBELI</h2>
+            <p>5.0</p>
+            <p>99% pembeli merasa puas</p>
+            <p>200 rating . {product.product_num_reviews}</p>
+          </div>
         </main>
 
-        <main className="bg-green-500 w-[36rem] ">
-          <h1 className="text-xl font-bold">
-            {product.product_title}
-          </h1>
+        <main className="bg-green-500 w-[36rem] translate-x-[2rem]">
+          <h1 className="text-xl font-bold bg-red-400">{product.product_title}</h1>
           <span className="flex gap-12">
             <p>Terjual {product.product_num_offers || 0}</p>
             <p className="flex items-center gap-2">
@@ -102,7 +108,7 @@ export default function DetailProduct(props: any) {
           </div>
         </main>
 
-        <main className="flex fixed flex-col gap-6 border-[1px] rounded-lg border-gray-300 h-full p-4 w-[18rem] mt-[2rem] right-0 bg-yellow-500">
+        <main className="flex fixed flex-col gap-6 border-[1px] w-[18rem] mr-[2rem] rounded-lg border-gray-300 h-full p-4 mt-[2rem] right-0 bg-yellow-500">
           <p className="font-semibold text-lg mb-1">Atur jumlah dan catatan</p>
           <span className="flex items-center gap-2">
             <span className="flex justify-between px-2 py-1 w-[5rem] border-[1px] rounded-lg scale-110 border-gray-300">
