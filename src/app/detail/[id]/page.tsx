@@ -2,12 +2,14 @@
 
 import Navbar from "@/app/components/fragments/navbar";
 import Image from "next/image";
-import { useEffect } from "react";
-import { Edit2, MinusCircle, PlusCircle, Star } from "react-feather";
-import { BsFillStarFill } from "react-icons/bs";
+import React, { useEffect, useRef } from "react";
+import { Edit2, MinusCircle, PlusCircle } from "react-feather";
+import { BsClock, BsFillStarFill, BsStar, BsTruck } from "react-icons/bs";
+import { GoLocation, GoVerified } from "react-icons/go";
 
 export default function DetailProduct(props: any) {
   const { params } = props;
+  const [imageSelected, setImageSelected] = React.useState(0);
   let product = JSON.parse(localStorage.getItem("products") || "").map(
     (product: any) =>
       product.data.find((product: any) => product.product_id == params.id)
@@ -20,50 +22,56 @@ export default function DetailProduct(props: any) {
       (product: any, i: number) =>
         product.split(":").length > 1 && (
           <span key={i} className="flex gap-2">
-            <p>{product.split(":")[0]}</p> : <p>{product.split(":")[1]}</p>
+            <p className="text-gray-700">{product.split(":")[0]}</p> :{" "}
+            <p>{product.split(":")[1]}</p>
           </span>
         )
     );
-    // useEffect(()=>{
-    //   window.addEventListener("click",(e)=>{
-    //     console.log(e.target?.style.);
-    //   })
-    // },[])
+
+  function selectingImage(e: any) {
+    setImageSelected(e.target.id);
+  }
 
   return (
     <>
       <Navbar />;
-      <div className="mt-[5rem] justify-center flex ">
+      <div className="mt-[5rem] justify-center flex">
         <main className=" fixed left-0 w-[22rem] ml-[2rem]">
           <div className="">
             <Image
               className="w-full h-[22rem] object-cover object-center rounded-lg"
-              src={product.product_photos[0]}
+              src={product.product_photos[imageSelected]}
               alt="Gambar Produk"
               width={300}
               height={300}
             ></Image>
-            <span className="flex gap-3 w-full mt-3 overflow-x-scroll">
+            <span
+              onClick={selectingImage}
+              className="flex gap-3 w-full mt-3 overflow-x-scroll"
+            >
               {product.product_photos.map((url: any, i: number) => (
                 <Image
                   className="h-[4rem] w-[4rem] object-cover object-center rounded-lg cursor-pointer"
                   key={i}
                   src={url}
-                  alt={i.toString()}
+                  id={i.toString()}
+                  alt={`Gambar ${i + 1}`}
                   width={300}
                   height={300}
                 ></Image>
               ))}
             </span>
-            <h2>ULASAN PEMBELI</h2>
-            <p>5.0</p>
-            <p>99% pembeli merasa puas</p>
-            <p>200 rating . {product.product_num_reviews}</p>
+            <span>
+              <h2>ULASAN PEMBELI</h2>
+              <p>5.0</p>
+              <p>99% pembeli merasa puas</p>
+              <p>200 rating . {product.product_num_reviews}</p>
+            </span>
           </div>
         </main>
 
-        <main className="bg-green-500 w-[36rem] translate-x-[2rem]">
-          <h1 className="text-xl font-bold bg-red-400">{product.product_title}</h1>
+        <main className="w-[36rem] translate-x-[2rem] h-[31rem] overflow-y-scroll">
+          <h1 className="text-xl font-bold w-3/4">{product.product_title}</h1>
           <span className="flex gap-12">
             <p>Terjual {product.product_num_offers || 0}</p>
             <p className="flex items-center gap-2">
@@ -71,44 +79,52 @@ export default function DetailProduct(props: any) {
               {product.product_rating} ({product.product_num_reviews || 0})
             </p>
           </span>
-          <p className="font-bold text-3xl mt-1 mb-6">
+          <p className="font-bold text-3xl mt-1 mb-8">
             {product.typical_price_range[0]}
           </p>
 
-          <div className="flex flex-col">
-            {productAtt}
-            <p>{product.product_description}</p>
+          <div className="grid gap-4 pb-5 border-b-[1px] border-gray-200 ">
+            <span>{productAtt}</span>
+            <span className="grid gap-2">
+              {product.product_description.split("-----").map((detail: any) => (
+                <p className="">{detail}</p>
+              ))}
+            </span>
           </div>
 
-          <div className="grid">
-            <span className="flex">
-              <Image
-                className="w-12 h-12"
-                width={300}
-                height={300}
-                src={"/images/diskon_sepatu.png"}
-                alt="Gambar Toko"
-              ></Image>
-              <span className="flex">
-                <span className="grid">
-                  <p>Broket</p>
-                  <p>Online 2 jam lalu</p>
-                </span>
-                <span className="">Follow</span>
+          <div className="flex mt-[1rem] p-3 rounded-lg gap-3 text-black">
+            <Image
+              className="w-[4rem] h-[4rem]"
+              width={300}
+              height={300}
+              src={"/images/diskon_sepatu.png"}
+              alt="Gambar Toko"
+            ></Image>
+            <span className="flex justify-between w-3/4 ">
+              <span className="grid ">
+                <p className="font-bold flex gap-1 items-center"><GoVerified className="text-blue-500"></GoVerified> Broket</p>
+                <p className="">
+                  <span className="">Online</span>
+                  <span className="font-bold text-gray-500  ml-1">2 jam lalu</span>
+                </p>
+                <p className="text-sm flex items-center gap-2"><BsStar></BsStar> <span>5 <span className="text-gray-600 ">(23)</span></span></p>
+                <p className="text-sm flex gap-2 items-center"><BsClock></BsClock> <span> +20 jam <span className="text-gray-600">pesanan diproses</span> </span></p>
+              </span>
+              <span className="w-28 rounded-lg flex bg-redP h-7 justify-center items-center font-semibold mt-2 text-white cursor-pointer">
+                Follow
               </span>
             </span>
-            <p>5(23)</p>
-            <p>20 menit yang lalu</p>
           </div>
 
-          <div>
-            <h2>Pengiriman</h2>
-            <p>Dikirim dari</p>
-            <p>Ongkir reguler 8 rb - 10 rb</p>
+          <div className="mt-3 pb-3">
+            <h2 className="font-bold">Pengiriman</h2>
+            <p className="flex gap-2"><GoLocation></GoLocation> Dikirim dari <span className="font-medium">Jakarta Barat</span></p>
+            <p className="flex gap-2"><BsTruck></BsTruck> Ongkir reguler 8 rb - 10 rb</p>
+            <p className="text-gray-500 text-sm">Estimasi tiba besok - 30 Juli</p>
           </div>
         </main>
 
-        <main className="flex fixed flex-col gap-6 border-[1px] w-[18rem] mr-[2rem] rounded-lg border-gray-300 h-full p-4 mt-[2rem] right-0 bg-yellow-500">
+        <main className="flex fixed flex-col gap-6 border-[1px] w-[18rem] mr-[2rem] rounded-lg border-gray-300 h-[24rem] p-4 mt-[2rem] right-0">
           <p className="font-semibold text-lg mb-1">Atur jumlah dan catatan</p>
           <span className="flex items-center gap-2">
             <span className="flex justify-between px-2 py-1 w-[5rem] border-[1px] rounded-lg scale-110 border-gray-300">

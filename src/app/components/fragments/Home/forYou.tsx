@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BsFillStarFill } from "react-icons/bs";
 export default function ForYou() {
   const [allProduct, setAllProduct] = React.useState<any>([]);
