@@ -9,9 +9,11 @@ import Navbar from "./components/fragments/navbar";
 export default function Home() {
   const styleHome = "px-10 flex flex-col gap-20";
   useEffect(() => {
-    localStorage.getItem("products") ?? dataProducts((res: any) => {
-      localStorage.setItem("products", JSON.stringify(res));
-    });
+    localStorage.getItem("products") != null
+      ? localStorage.getItem("products")
+      : dataProducts((res: any) => {
+          localStorage.setItem("products", JSON.stringify(res));
+        });
   }, []);
   return (
     <>

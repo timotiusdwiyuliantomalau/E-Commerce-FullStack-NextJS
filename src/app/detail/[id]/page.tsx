@@ -83,7 +83,7 @@ export default function DetailProduct(props: any) {
             {product.typical_price_range[0]}
           </p>
 
-          <div className="grid gap-4 pb-5 border-b-[1px] border-gray-200 ">
+          <div className="grid gap-4 pb-5 border-b-[1px] border-gray-200 shadow-md">
             <span>{productAtt}</span>
             <span className="grid gap-2">
               {product.product_description.split("-----").map((detail: any) => (
@@ -92,20 +92,21 @@ export default function DetailProduct(props: any) {
             </span>
           </div>
 
-          <div className="flex mt-[1rem] p-3 rounded-lg gap-3 text-black">
+          <div className="flex mt-[2rem] p-3 rounded-lg gap-3 text-black">
             <Image
-              className="w-[4rem] h-[4rem]"
+              className="w-[4rem] h-[4rem] bg-black rounded-full"
               width={300}
               height={300}
               src={"/images/diskon_sepatu.png"}
+              
               alt="Gambar Toko"
             ></Image>
             <span className="flex justify-between w-3/4 ">
               <span className="grid ">
-                <p className="font-bold flex gap-1 items-center"><GoVerified className="text-blue-500"></GoVerified> Broket</p>
+                <p className="font-bold flex gap-1 items-center"><GoVerified className="text-blue-500"></GoVerified>{product.offer.store_name}</p>
                 <p className="">
                   <span className="">Online</span>
-                  <span className="font-bold text-gray-500  ml-1">2 jam lalu</span>
+                  <span className="font-semibold text-gray-500  ml-1">2 jam lalu</span>
                 </p>
                 <p className="text-sm flex items-center gap-2"><BsStar></BsStar> <span>5 <span className="text-gray-600 ">(23)</span></span></p>
                 <p className="text-sm flex gap-2 items-center"><BsClock></BsClock> <span> +20 jam <span className="text-gray-600">pesanan diproses</span> </span></p>
@@ -116,7 +117,7 @@ export default function DetailProduct(props: any) {
             </span>
           </div>
 
-          <div className="mt-3 pb-3">
+          <div className="mt-4">
             <h2 className="font-bold">Pengiriman</h2>
             <p className="flex gap-2"><GoLocation></GoLocation> Dikirim dari <span className="font-medium">Jakarta Barat</span></p>
             <p className="flex gap-2"><BsTruck></BsTruck> Ongkir reguler 8 rb - 10 rb</p>

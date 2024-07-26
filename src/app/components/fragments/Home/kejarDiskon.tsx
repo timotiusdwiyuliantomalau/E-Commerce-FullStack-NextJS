@@ -37,12 +37,12 @@ export default function KejarDiskon() {
             Kejar Diskon Spesial
           </h1>
           <p className="ml-4 text-gray-700">Berakhir dalam </p>
-          <span className="flex gap-2 text-#A0153E font-semibold items-center">
-            <p className="p-2 rounded-md w-10 text-center bg-[#A0153E] text-white">
+          <span className="flex gap-2 text-redP font-semibold items-center">
+            <p className="p-2 rounded-md w-10 text-center bg-redP  text-white">
               {hour.toString().split(".")[0]}
             </p>
             :
-            <p className="p-2 rounded-md w-10 text-center bg-[#A0153E] text-white">
+            <p className="p-2 rounded-md w-10 text-center bg-redP  text-white">
               {min < 1
                 ? min.toString().substring(0, 1) + "0"
                 : min.toString().substring(0, 2)}
@@ -50,7 +50,7 @@ export default function KejarDiskon() {
             :
             <p
               ref={countdownAnimate}
-              className="p-2 rounded-md w-10 text-center bg-[#A0153E] text-white"
+              className="p-2 rounded-md w-10 text-center bg-redP  text-white"
             >
               {sec < 10
                 ? "0" + sec.toString().split(".")[0]
@@ -72,13 +72,13 @@ export default function KejarDiskon() {
                   <p className="font-bold text-xl">Rp. 1.000.000</p>
                   <p className="text-gray-700">
                     Rp. 1.000.000{" "}
-                    <span className="text-[#A0153E] font-bold ml-1">40%</span>
+                    <span className="text-redP  font-bold ml-1">40%</span>
                   </p>
                 </span>
                 <span className="h-2 bg-gray-300 rounded-lg w-[95%] block">
                   <span
                     ref={barDiscount}
-                    className="block w-[63%] h-2 justify-center bg-[#A0153E] rounded-lg"
+                    className="block w-[63%] h-2 justify-center bg-redP  rounded-lg"
                   ></span>
                   <p className="text-gray-500 text-sm">Tersedia</p>
                 </span>
