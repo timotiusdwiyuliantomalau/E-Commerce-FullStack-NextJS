@@ -7,9 +7,9 @@ import KejarDiskon from "../fragments/Home/kejarDiskon";
 export default function AtasHomepage(homeClassName: any) {
   return (
     <>
-      <div className="flex mt-[5.5rem]">
+      <div className="flex mt-[5.5rem] justify-center">
         <div
-          className={`flex flex-col items-center w-full ${homeClassName.homeClassName}`}
+          className={`flex flex-col  w-full ${homeClassName.homeClassName}`}
         >
           <Banner/>
           <Kategori></Kategori>

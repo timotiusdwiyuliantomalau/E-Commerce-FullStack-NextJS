@@ -36,13 +36,13 @@ export default function KejarDiskon() {
           <h1 className="text-left text-2xl font-semibold">
             Kejar Diskon Spesial
           </h1>
-          <p className="ml-4 text-gray-700">Berakhir dalam </p>
-          <span className="flex gap-2 text-redP font-semibold items-center">
-            <p className="p-2 rounded-md w-10 text-center bg-redP  text-white">
+          <p className="ml-4 text-gray-600">Berakhir dalam </p>
+          <span className="flex gap-2 text-yellow-bg-yellow-600 font-semibold items-center">
+            <p className="p-2 rounded-md w-10 text-center bg-gradient-to-br from-yellow-700 to-yellow-500  text-white">
               {hour.toString().split(".")[0]}
             </p>
             :
-            <p className="p-2 rounded-md w-10 text-center bg-redP  text-white">
+            <p className="p-2 rounded-md w-10 text-center bg-gradient-to-br from-yellow-700 to-yellow-500  text-white">
               {min < 1
                 ? min.toString().substring(0, 1) + "0"
                 : min.toString().substring(0, 2)}
@@ -50,7 +50,7 @@ export default function KejarDiskon() {
             :
             <p
               ref={countdownAnimate}
-              className="p-2 rounded-md w-10 text-center bg-redP  text-white"
+              className="p-2 rounded-md w-10 text-center bg-gradient-to-br from-yellow-700 to-yellow-500  text-white"
             >
               {sec < 10
                 ? "0" + sec.toString().split(".")[0]
@@ -70,15 +70,15 @@ export default function KejarDiskon() {
               <div className="pl-3 flex flex-col gap-7">
                 <span className="flex flex-col">
                   <p className="font-bold text-xl">Rp. 1.000.000</p>
-                  <p className="text-gray-700">
+                  <p className="text-gray-600">
                     Rp. 1.000.000{" "}
-                    <span className="text-redP  font-bold ml-1">40%</span>
+                    <span className="text-yellow-bg-yellow-600  font-bold ml-1">40%</span>
                   </p>
                 </span>
                 <span className="h-2 bg-gray-300 rounded-lg w-[95%] block">
                   <span
                     ref={barDiscount}
-                    className="block w-[63%] h-2 justify-center bg-redP  rounded-lg"
+                    className="block w-[63%] h-2 justify-center bg-gradient-to-br from-yellow-700 to-yellow-500  rounded-lg"
                   ></span>
                   <p className="text-gray-500 text-sm">Tersedia</p>
                 </span>

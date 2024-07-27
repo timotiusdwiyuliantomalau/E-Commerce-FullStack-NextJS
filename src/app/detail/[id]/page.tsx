@@ -83,7 +83,7 @@ export default function DetailProduct(props: any) {
             {product.typical_price_range[0]}
           </p>
 
-          <div className="grid gap-4 pb-5 border-b-[1px] border-gray-200 shadow-md">
+          <div className="grid gap-4 pb-7 border-b-[2px] border-gray-200 ">
             <span>{productAtt}</span>
             <span className="grid gap-2">
               {product.product_description.split("-----").map((detail: any) => (
@@ -92,7 +92,7 @@ export default function DetailProduct(props: any) {
             </span>
           </div>
 
-          <div className="flex mt-[2rem] p-3 rounded-lg gap-3 text-black">
+          <div className="flex mt-[2rem] rounded-lg gap-3 text-black ml-5">
             <Image
               className="w-[4rem] h-[4rem] bg-black rounded-full"
               width={300}
@@ -111,16 +111,16 @@ export default function DetailProduct(props: any) {
                 <p className="text-sm flex items-center gap-2"><BsStar></BsStar> <span>5 <span className="text-gray-600 ">(23)</span></span></p>
                 <p className="text-sm flex gap-2 items-center"><BsClock></BsClock> <span> +20 jam <span className="text-gray-600">pesanan diproses</span> </span></p>
               </span>
-              <span className="w-28 rounded-lg flex bg-redP h-7 justify-center items-center font-semibold mt-2 text-white cursor-pointer">
+              <span className="w-28 rounded-lg flex bg-redP h-7 justify-center items-center font-semibold text-white cursor-pointer">
                 Follow
               </span>
             </span>
           </div>
 
-          <div className="mt-4">
+          <div className="mt-4 ml-5">
             <h2 className="font-bold">Pengiriman</h2>
-            <p className="flex gap-2"><GoLocation></GoLocation> Dikirim dari <span className="font-medium">Jakarta Barat</span></p>
-            <p className="flex gap-2"><BsTruck></BsTruck> Ongkir reguler 8 rb - 10 rb</p>
+            <p className="flex gap-2 items-center"><GoLocation></GoLocation> Dikirim dari <span className="font-medium">Jakarta Barat</span></p>
+            <p className="flex gap-2 items-center"><BsTruck></BsTruck> Ongkir reguler 8 rb - 10 rb</p>
             <p className="text-gray-500 text-sm">Estimasi tiba besok - 30 Juli</p>
           </div>
         </main>

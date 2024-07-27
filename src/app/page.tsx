@@ -7,7 +7,7 @@ import TengahHomepage from "./components/Homepage/tengah";
 import Navbar from "./components/fragments/navbar";
 
 export default function Home() {
-  const styleHome = "px-10 flex flex-col gap-20";
+  const styleHome = "w-[76rem] flex flex-col gap-20";
   useEffect(() => {
     localStorage.getItem("products") != null
       ? localStorage.getItem("products")

@@ -5,12 +5,12 @@ import { RxCross1 } from "react-icons/rx";
 export default function ModalLogin() {
   return (
     <>
-      <main>
-        <div className="w-1/4 h-3/4 p-8 grid ">
-          <RxCross1 className="text-2xl place-self-end cursor-pointer hover:bg-gray-200"></RxCross1>
-          <span className="flex justify-between items-end">
-            <h1 className="font-bold text-2xl">Masuk</h1>
-            <a href="" className="font-medium text-sm">
+      <main className="flex justify-center ">
+        <div className="w-1/4 h-3/4 px-8 pb-8 pt-4 grid">
+          <RxCross1 className="text-2xl place-self-end cursor-pointer hover:bg-gray-200 mb-3"></RxCross1>
+          <span className="flex justify-between items-end mb-2 ">
+            <h1 className="font-bold text-3xl">Masuk</h1>
+            <a href="" className="font-semibold text-sm text-blueP">
               Daftar
             </a>
           </span>

@@ -13,20 +13,20 @@ export default function ForYou() {
 
   return (
     <>
-      <main className="w-full">
+      <main className="w-full ">
         <h1 className="text-left text-2xl font-semibold w-full mb-7">
           For You
         </h1>
-        <div className="flex gap-8  flex-wrap">
+        <div className="flex gap-8 flex-wrap">
           {arrProducts &&
             arrProducts?.map((products: any, index: number) =>
               products.data?.map((product: any, i: number) => (
                 <span
                   key={i}
-                  className="flex flex-col rounded-lg  w-[13rem] h-[23rem] border-2 border-gray-200 shadow-md cursor-pointer group"
+                  className="flex flex-col rounded-lg  w-[11rem] h-[20rem] border-2 border-gray-200 cursor-pointer group"
                 >
                   <Image
-                    className="h-[13rem] group rounded-lg rounded-br-[2.5em] bg-blue-900 object-cover object-center"
+                    className="h-[11rem] group rounded-lg rounded-br-[2.5em] bg-blue-900 object-cover object-center"
                     src={product.product_photos[0]}
                     alt={`Gambar ${index + 1}`}
                     width={300}
