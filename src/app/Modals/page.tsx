@@ -2,21 +2,25 @@ import { CgPassword } from "react-icons/cg";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { RxCross1 } from "react-icons/rx";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../utils/redux/store";
+import { closeLoginModal } from "../../../utils/redux/modalSlice";
 export default function ModalLogin() {
+  const dispatch=useDispatch<AppDispatch>();
   return (
     <>
-      <main className="flex justify-center ">
-        <div className="w-1/4 h-3/4 px-8 pb-8 pt-4 grid">
-          <RxCross1 className="text-2xl place-self-end cursor-pointer hover:bg-gray-200 mb-3"></RxCross1>
-          <span className="flex justify-between items-end mb-2 ">
-            <h1 className="font-bold text-3xl">Masuk</h1>
+      <div className="bg-black z-20 w-full h-full bg-opacity-80 fixed">
+        <div className="absolute top-12 left-1/2 -translate-x-1/2 justify-center bg-white px-8 pt-6 pb-12 grid rounded-md">
+          <RxCross1 onClick={()=>dispatch(closeLoginModal())} className="text-2xl place-self-end cursor-pointer hover:bg-gray-200 mb-3"></RxCross1>
+          <span className="flex justify-between items-end mb-4 ">
+            <h1 className="font-extrabold text-2xl">Masuk</h1>
             <a href="" className="font-semibold text-sm text-blueP">
               Daftar
             </a>
           </span>
-          <div className="grid gap-3">
+          <div className="grid gap-4">
             <span className="flex items-center  w-72 rounded-x bg-gray-300">
-              <MdEmail className="w-10 h-10 p-2"></MdEmail>
+              <MdEmail className="w-10 h-10 p-2 rounded-md"></MdEmail>
               <span className="relative w-full min-w-[200px] h-10 bg-white">
                 <input
                   className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 border-blue-gray-200 focus:border-gray-900"
@@ -40,12 +44,18 @@ export default function ModalLogin() {
                 </label>
               </span>
             </span>
-            <input type="submit" value="Masuk" className="bg-blueP text-white font-bold p-2 rounded-lg mt-2 cursor-pointer"/>
+            <input
+              type="submit"
+              value="Masuk"
+              className="block bg-blueP text-white font-bold p-2 rounded-lg mt-2 cursor-pointer hover:border-[2px] hover:border-yellow-500 box-content"
+            />
           </div>
-          <p className="text-center mt-5 text-sm">atau masuk dengan </p>
-          <button className="border-[1px] mt-1 text-sm font-medium p-1 rounded-md border-gray-300  w-full ">Metode Lain</button>
+          <p className="text-center mt-5 text-xs text-gray-600">atau masuk dengan </p>
+          <button className="border-[1px] mt-1 text-xs text-gray-600 font-semibold hover:bg-gray-200 p-1 rounded-md border-gray-300  w-full ">
+            Metode Lain
+          </button>
         </div>
-      </main>
+      </div>
     </>
   );
 }

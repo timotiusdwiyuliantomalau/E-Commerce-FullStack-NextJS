@@ -9,7 +9,7 @@ export default function AtasHomepage(homeClassName: any) {
     <>
       <div className="flex mt-[5.5rem] justify-center">
         <div
-          className={`flex flex-col  w-full ${homeClassName.homeClassName}`}
+          className={`flex flex-col justify-center ${homeClassName.homeClassName}`}
         >
           <Banner/>
           <Kategori></Kategori>

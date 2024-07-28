@@ -84,10 +84,10 @@ export default function DetailProduct(props: any) {
           </p>
 
           <div className="grid gap-4 pb-7 border-b-[2px] border-gray-200 ">
-            <span>{productAtt}</span>
+            <span className="text-sm">{productAtt}</span>
             <span className="grid gap-2">
               {product.product_description.split("-----").map((detail: any) => (
-                <p className="">{detail}</p>
+                <p className="text-sm">{detail}</p>
               ))}
             </span>
           </div>
@@ -102,38 +102,38 @@ export default function DetailProduct(props: any) {
               alt="Gambar Toko"
             ></Image>
             <span className="flex justify-between w-3/4 ">
-              <span className="grid ">
-                <p className="font-bold flex gap-1 items-center"><GoVerified className="text-blue-500"></GoVerified>{product.offer.store_name}</p>
+              <span className="grid text-sm">
+                <p className="font-bold flex gap-1 items-center "><GoVerified className="text-blue-500"></GoVerified>{product.offer.store_name}</p>
                 <p className="">
                   <span className="">Online</span>
                   <span className="font-semibold text-gray-500  ml-1">2 jam lalu</span>
                 </p>
-                <p className="text-sm flex items-center gap-2"><BsStar></BsStar> <span>5 <span className="text-gray-600 ">(23)</span></span></p>
-                <p className="text-sm flex gap-2 items-center"><BsClock></BsClock> <span> +20 jam <span className="text-gray-600">pesanan diproses</span> </span></p>
+                <p className="text-xs flex items-center gap-2"><BsStar></BsStar> <span>5 <span className="text-gray-600 ">(23)</span></span></p>
+                <p className="text-xs flex gap-2 items-center"><BsClock></BsClock> <span> +20 jam <span className="text-gray-600">pesanan diproses</span> </span></p>
               </span>
-              <span className="w-28 rounded-lg flex bg-redP h-7 justify-center items-center font-semibold text-white cursor-pointer">
+              <span className="w-28 rounded-lg text-sm flex bg-redP hover:bg-redS h-7 justify-center items-center font-semibold text-white cursor-pointer">
                 Follow
               </span>
             </span>
           </div>
 
-          <div className="mt-4 ml-5">
+          <div className="mt-4 ml-5 pb-4 text-sm">
             <h2 className="font-bold">Pengiriman</h2>
             <p className="flex gap-2 items-center"><GoLocation></GoLocation> Dikirim dari <span className="font-medium">Jakarta Barat</span></p>
             <p className="flex gap-2 items-center"><BsTruck></BsTruck> Ongkir reguler 8 rb - 10 rb</p>
-            <p className="text-gray-500 text-sm">Estimasi tiba besok - 30 Juli</p>
+            <p className="text-gray-500 text-xs">Estimasi tiba besok - 30 Juli</p>
           </div>
         </main>
 
-        <main className="flex fixed flex-col gap-6 border-[1px] w-[18rem] mr-[2rem] rounded-lg border-gray-300 h-[24rem] p-4 mt-[2rem] right-0">
-          <p className="font-semibold text-lg mb-1">Atur jumlah dan catatan</p>
+        <main className="flex text-sm fixed flex-col gap-6 border-[1px] w-[18rem] mr-[2rem] rounded-lg border-gray-300 h-[24rem] p-4 mt-[2rem] right-0 ">
+          <p className="font-semibold mb-1 text-lg">Atur jumlah dan catatan</p>
           <span className="flex items-center gap-2">
             <span className="flex justify-between px-2 py-1 w-[5rem] border-[1px] rounded-lg scale-110 border-gray-300">
               <MinusCircle className=" text-gray-200 w-4"></MinusCircle>
               <span>1</span>
               <PlusCircle className="w-4 opacity-40 text-blueP hover:opacity-90 cursor-pointer rounded-full "></PlusCircle>
             </span>
-            <span className="flex gap-1 text-sm">
+            <span className="flex gap-1 text-xs">
               <p>Stok Total</p>
               <p>:</p>
               <p className="font-bold">50</p>
@@ -141,11 +141,11 @@ export default function DetailProduct(props: any) {
           </span>
           <span className="flex gap-1 items-center">
             <Edit2 className="text-blueP w-3"></Edit2>
-            <p className="text-blueP text-sm font-bold">Tambah Catatan</p>
+            <p className="text-blueP text-xs font-bold">Tambah Catatan</p>
           </span>
           <span className="flex items-center justify-between">
             <p className="text-gray-600 ">Subtotal</p>
-            <p className="font-bold text-xl">
+            <p className="font-bold text-lg">
               Rp. {product.typical_price_range[0]}
             </p>
           </span>

@@ -1,8 +1,15 @@
 import Link from "next/link";
 import { Search } from "react-feather";
 import { ShoppingCart } from "react-feather";
+import { openLoginModal } from "../../../../utils/redux/modalSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../../utils/redux/store";
 
 export default function Navbar() {
+    const dispatch=useDispatch<AppDispatch>();
+    function openModalLogin(){
+        dispatch(openLoginModal())
+    }
 return(
     <>
     <div className="fixed flex w-full top-0 justify-between px-12 py-4 items-center bg-white z-10">
@@ -17,7 +24,7 @@ return(
         <div className="flex gap-6 items-center">
         <ShoppingCart></ShoppingCart>
         <p className="text-3xl font-extralight text-gray-300">|</p>
-        <button  className="p-2 font-medium rounded-lg bg-[#00224D] text-white">Masuk</button>
+        <button onClick={openModalLogin}  className="p-2 font-medium rounded-lg bg-[#00224D] text-white">Masuk</button>
         </div>
     </div>
     </>

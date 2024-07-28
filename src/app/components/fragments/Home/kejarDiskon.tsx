@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Container } from "postcss";
 import React, { useEffect, useRef, useState } from "react";
 
 export default function KejarDiskon() {
@@ -38,11 +37,11 @@ export default function KejarDiskon() {
           </h1>
           <p className="ml-4 text-gray-600">Berakhir dalam </p>
           <span className="flex gap-2 text-yellow-bg-yellow-600 font-semibold items-center">
-            <p className="p-2 rounded-md w-10 text-center bg-gradient-to-br from-yellow-700 to-yellow-500  text-white">
+            <p className="p-2 rounded-md w-10 text-center bg-redP  text-white">
               {hour.toString().split(".")[0]}
             </p>
             :
-            <p className="p-2 rounded-md w-10 text-center bg-gradient-to-br from-yellow-700 to-yellow-500  text-white">
+            <p className="p-2 rounded-md w-10 text-center bg-redP  text-white">
               {min < 1
                 ? min.toString().substring(0, 1) + "0"
                 : min.toString().substring(0, 2)}
@@ -50,7 +49,7 @@ export default function KejarDiskon() {
             :
             <p
               ref={countdownAnimate}
-              className="p-2 rounded-md w-10 text-center bg-gradient-to-br from-yellow-700 to-yellow-500  text-white"
+              className="p-2 rounded-md w-10 text-center bg-redP  text-white"
             >
               {sec < 10
                 ? "0" + sec.toString().split(".")[0]
@@ -78,7 +77,7 @@ export default function KejarDiskon() {
                 <span className="h-2 bg-gray-300 rounded-lg w-[95%] block">
                   <span
                     ref={barDiscount}
-                    className="block w-[63%] h-2 justify-center bg-gradient-to-br from-yellow-700 to-yellow-500  rounded-lg"
+                    className="block w-[63%] h-2 justify-center bg-gradient-to-r from-redP  to-red-200  rounded-lg"
                   ></span>
                   <p className="text-gray-500 text-sm">Tersedia</p>
                 </span>

@@ -3,10 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { BsFillStarFill } from "react-icons/bs";
-import { FaStore } from "react-icons/fa6";
 import { GoVerified } from "react-icons/go";
 export default function ForYou() {
-  const [allProduct, setAllProduct] = React.useState<any>([]);
   const arrProducts =
     localStorage.getItem("products") &&
     JSON.parse(localStorage.getItem("products") || "");
@@ -35,22 +33,22 @@ export default function ForYou() {
                   <span className="pl-2 grid">
                     <Link
                       href={`detail/${product.product_id}`}
-                      className=" mb-1 h-[3rem] overflow-hidden group-hover:underline"
+                      className=" mb-1 h-[2.5rem] text-sm overflow-hidden group-hover:underline"
                     >
                       {product.product_title}
                     </Link>
-                    <p className="text-xl font-semibold">
+                    <p className="text-lg font-semibold">
                       {product.typical_price_range != null
                         ? product.typical_price_range[0]
                         : "$32"}
                     </p>
                     <span className="flex gap-1 items-center overflow-hidden">
                       <GoVerified className="text-blue-400 w-4 h-4"></GoVerified>
-                      <p className="text-sm text-gray-600 h-6 w-full overflow-hidden">
+                      <p className="text-xs text-gray-600 h-6 w-full overflow-hidden">
                         {product.offer.store_name}
                       </p>
                     </span>
-                    <span className="flex gap-1 text-sm items-center text-gray-600">
+                    <span className="flex gap-1 text-xs items-center text-gray-600">
                       <BsFillStarFill className="text-yellow-500 inline" />{" "}
                       {product.product_rating}
                       <span>|</span>
