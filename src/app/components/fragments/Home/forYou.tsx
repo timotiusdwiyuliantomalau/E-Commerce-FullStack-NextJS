@@ -21,7 +21,7 @@ export default function ForYou() {
               products.data?.map((product: any, i: number) => (
                 <span
                   key={i}
-                  className="flex flex-col rounded-lg  w-[11rem] h-[20rem] border-2 border-gray-200 cursor-pointer group"
+                  className="flex flex-col rounded-lg  w-[11rem] pb-5 border-2 border-gray-200 cursor-pointer group"
                 >
                   <Image
                     className="h-[11rem] group rounded-lg rounded-br-[2.5em] bg-blue-900 object-cover object-center"
@@ -33,18 +33,18 @@ export default function ForYou() {
                   <span className="pl-2 grid">
                     <Link
                       href={`detail/${product.product_id}`}
-                      className=" mb-1 h-[2.5rem] text-sm overflow-hidden group-hover:underline"
+                      className=" mb-2 mt-1 h-[2.5rem] text-sm overflow-hidden group-hover:underline"
                     >
                       {product.product_title}
                     </Link>
-                    <p className="text-lg font-semibold">
+                    <p className="text-lg font-semibold mb-1">
                       {product.typical_price_range != null
                         ? product.typical_price_range[0]
                         : "$32"}
                     </p>
-                    <span className="flex gap-1 items-center overflow-hidden">
+                    <span className="flex gap-1 mb-1 items-center overflow-hidden">
                       <GoVerified className="text-blue-400 w-4 h-4"></GoVerified>
-                      <p className="text-xs text-gray-600 h-6 w-full overflow-hidden">
+                      <p className="text-xs text-gray-600 h-4 w-full overflow-hidden">
                         {product.offer.store_name}
                       </p>
                     </span>

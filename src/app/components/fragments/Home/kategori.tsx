@@ -8,59 +8,15 @@ export default function Kategori() {
           Kategori Pilihan
         </h1>
         <div className="grid grid-cols-3 justify-items-center gap-12 cursor-pointer">
-          <span className="w-72">
+          <span className="w-72 relative">
             <Image
               src="/images/kategori_baju.png"
               alt="baju"
               width={500}
               height={500}
-              className="w-full hover:bg-red-500 rounded-full"
+              className="w-full opacity-70 hover:opacity-100"
             ></Image>
-          </span>
-          <span className="w-72">
-            <Image
-              src="/images/kategori_celana.png"
-              alt="celana"
-              width={500}
-              height={500}
-              className="w-full hover:bg-red-500 rounded-full"
-            ></Image>
-          </span>
-          <span className="w-72">
-            <Image
-              src="/images/kategori_sepatu.png"
-              alt="sepatu"
-              width={500}
-              height={500}
-              className="w-full hover:bg-red-500 rounded-full h-full object-contain"
-            ></Image>
-          </span>
-          <span className="w-72">
-            <Image
-              src="/images/kategori_tas.png"
-              alt="tas"
-              width={500}
-              height={500}
-              className="w-full hover:bg-red-500 rounded-full h-full object-contain"
-            ></Image>
-          </span>
-          <span className="w-72">
-            <Image
-              src="/images/kategori_topi.png"
-              alt="topi"
-              width={500}
-              height={500}
-              className="w-full hover:bg-red-500 rounded-full h-full object-contain"
-            ></Image>
-          </span>
-          <span className="w-72">
-            <Image
-              src="/images/kategori_kacamata.png"
-              alt="kacamata"
-              width={500}
-              height={500}
-              className="w-full hover:bg-red-500 rounded-full h-full object-contain"
-            ></Image>
+            {/* <div className="w-3/4 h-3/4 hidden block bg-yellow-300 rounded-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 blur-lg"></div> */}
           </span>
         </div>
       </main>
