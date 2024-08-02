@@ -6,10 +6,17 @@ import Navbar from "../components/fragments/navbar";
 import { Heart, Trash2 } from "react-feather";
 import { SlNote } from "react-icons/sl";
 import { IoIosArrowForward } from "react-icons/io";
+import ModalLogin from "../Modals/loginModal";
+import ModalRegister from "../Modals/registerModal";
+import { useAppsSelector } from "../../../utils/redux/store";
 
 export default function CartPage() {
+  const isLoginModal = useAppsSelector((state) => state.modalSlice.login);
+  const isRegisterModal = useAppsSelector((state) => state.modalSlice.register);
   return (
     <>
+    {isLoginModal && <ModalLogin></ModalLogin>}
+    {isRegisterModal && <ModalRegister></ModalRegister>}
       <div className="flex flex-col h-screen pt-[6rem] items-center ">
         <Navbar></Navbar>
         <h1 className="text-2xl font-semibold w-11/12 mb-5">Keranjang Saya</h1>
