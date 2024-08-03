@@ -8,7 +8,9 @@ import {
   closeLoginModal,
   openRegisterModal,
 } from "../../../utils/redux/modalSlice";
+import { useState } from "react";
 export default function ModalLogin() {
+  const [errorLogin, setErrorLogin] = useState("");
   const dispatch = useDispatch<AppDispatch>();
   async function handleLogin(e: any) {
     e.preventDefault();
@@ -20,8 +22,9 @@ export default function ModalLogin() {
       }),
     });
     const res = await result.json();
-    if(res){
-      window.location.href="/";
+    setErrorLogin(res.message);
+    if(res.success===true){
+      window.location.href="/cart";
     }
   }
   return (
@@ -50,7 +53,7 @@ export default function ModalLogin() {
                 <input
                   className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 border-blue-gray-200 focus:border-gray-900"
                   placeholder=" "
-                  name="email"
+                  name="email" required
                 />
                 <label className="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent  before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent  after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-gray-500 peer-focus:text-gray-900 before:border-blue-gray-200 peer-focus:before:!border-gray-900 after:border-blue-gray-200 peer-focus:after:!border-gray-900">
                   Email
@@ -64,7 +67,7 @@ export default function ModalLogin() {
                   type="password"
                   className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 border-blue-gray-200 focus:border-gray-900"
                   placeholder=" "
-                  name="password"
+                  name="password" required
                 />
                 <label className="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent  before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent  after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-gray-500 peer-focus:text-gray-900 before:border-blue-gray-200 peer-focus:before:!border-gray-900 after:border-blue-gray-200 peer-focus:after:!border-gray-900">
                   Password
@@ -77,6 +80,7 @@ export default function ModalLogin() {
               className="block bg-blueP text-white font-bold p-2 rounded-lg mt-2 cursor-pointer outline hover:outline-[2px] hover:outline-yellow-500 box-content"
             />
           </div>
+          <p className="text-red-500 text-xs font-semibold mt-2 text-center">{errorLogin}</p>
           <p className="text-center mt-7 text-xs text-gray-600">
             atau masuk dengan{" "}
           </p>

@@ -4,5 +4,5 @@ import { loginUser } from "../../../../../utils/firebase/service";
 export async function POST(request: NextRequest) {
   const req = await request.json();
   const res = await loginUser(req);
-  return NextResponse.json(res);
+  return NextResponse.json(res,{status:res.statusCode});
 }
