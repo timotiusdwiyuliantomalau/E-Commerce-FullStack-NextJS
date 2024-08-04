@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React, { useState } from "react";
 import { Edit2, MinusCircle, PlusCircle } from "react-feather";
 export default function KananDetail(products: any) {
@@ -27,7 +26,7 @@ export default function KananDetail(products: any) {
         <span className="flex items-center justify-between">
           <p className="text-gray-600 ">Subtotal</p>
           <p className="font-bold text-lg">
-            $ {parseFloat(product.typical_price_range[0].split('$')[1])*qty}
+            $ {(product.typical_price_range[0].split('$')[1]*qty).toString().split('.').length>1?(parseFloat(product.typical_price_range[0].split('$')[1])*qty).toString().split('.')[0]+"."+(parseFloat(product.typical_price_range[0].split('$')[1])*qty).toString().split('.')[1].substring(0,2) :parseFloat(product.typical_price_range[0].split('$')[1])*qty}
           </p>
         </span>
         <span className="grid gap-2 mt-2 mb-2">

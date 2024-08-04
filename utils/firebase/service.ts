@@ -1,6 +1,6 @@
 
 import app from "./init";
-import bcrypt from "bcrypt";
+import bcrypt, { compare } from "bcrypt";
 import {
   addDoc,
   collection,
@@ -55,7 +55,8 @@ export async function loginUser(data: any) {
   const snapshot = await getDocs(q);
   const user = snapshot.docs.map((doc) => doc.data());
   if (user.length > 0) {
-    if (user[0].password !== data.password) {
+    const checkPassword = await compare(data.password, user[0].password);
+    if (!checkPassword) {
       return {
         success: false,
         message: "Password tidak sesuai!",

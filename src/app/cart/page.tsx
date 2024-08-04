@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import { MdVerified } from "react-icons/md";
-import Navbar from "../components/fragments/navbar";
+import Navbar from "../components/Navbar/navbar";
 import { Heart, Trash2 } from "react-feather";
 import { SlNote } from "react-icons/sl";
 import { IoIosArrowForward } from "react-icons/io";
@@ -15,8 +15,8 @@ export default function CartPage() {
   const isRegisterModal = useAppsSelector((state) => state.modalSlice.register);
   return (
     <>
-    {isLoginModal && <ModalLogin></ModalLogin>}
-    {isRegisterModal && <ModalRegister></ModalRegister>}
+      {isLoginModal && <ModalLogin></ModalLogin>}
+      {isRegisterModal && <ModalRegister></ModalRegister>}
       <div className="flex flex-col h-screen pt-[6rem] items-center ">
         <Navbar></Navbar>
         <h1 className="text-2xl font-semibold w-11/12 mb-5">Keranjang Saya</h1>
@@ -24,7 +24,7 @@ export default function CartPage() {
           <main className="flex flex-col w-8/12 ">
             <div className="flex justify-between bg-redP text-white rounded-md py-3 px-5 ">
               <span className="flex gap-4 items-center">
-                <input type="checkbox" className="w-4 h-4 rounded-md"  />
+                <input type="checkbox" className="w-4 h-4 rounded-md" />
                 <p className="font-semibold">
                   Pilih Semua{" "}
                   <span className="font-normal text-white">(1)</span>

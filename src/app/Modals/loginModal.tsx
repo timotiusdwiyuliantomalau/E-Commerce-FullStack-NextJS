@@ -9,6 +9,7 @@ import {
   openRegisterModal,
 } from "../../../utils/redux/modalSlice";
 import { useState } from "react";
+import { setCookie } from "../../../utils/cookies";
 export default function ModalLogin() {
   const [errorLogin, setErrorLogin] = useState("");
   const dispatch = useDispatch<AppDispatch>();
@@ -24,7 +25,8 @@ export default function ModalLogin() {
     const res = await result.json();
     setErrorLogin(res.message);
     if(res.success===true){
-      window.location.href="/cart";
+      setCookie("login","success",1000*60*60);
+      window.location.href="/";
     }
   }
   return (

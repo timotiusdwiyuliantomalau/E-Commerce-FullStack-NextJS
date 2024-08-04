@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { dataProducts } from "../../utils/fetchData";
 import AtasHomepage from "./components/Homepage/atas";
 import TengahHomepage from "./components/Homepage/tengah";
-import Navbar from "./components/fragments/navbar";
 import { useAppsSelector } from "../../utils/redux/store";
 import ModalLogin from "./Modals/loginModal";
 import ModalRegister from "./Modals/registerModal";
+import Navbar from "./components/Navbar/navbar";
 
 export default function Home() {
   const styleHome = "w-[76rem] flex flex-col gap-20";
@@ -18,7 +18,7 @@ export default function Home() {
           localStorage.setItem("products", JSON.stringify(res));
         });
   }, []);
-
+  
   const isLoginModal = useAppsSelector((state) => state.modalSlice.login);
   const isRegisterModal = useAppsSelector((state) => state.modalSlice.register);
   return (

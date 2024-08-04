@@ -1,12 +1,13 @@
 "use client";
 
-import Navbar from "@/app/components/fragments/navbar";
+import Navbar from "@/app/components/Navbar/navbar";
 import ModalLogin from "@/app/Modals/loginModal";
 import { useAppsSelector } from "../../../../utils/redux/store";
 import KiriDetail from "./kiri";
 import TengahDetail from "./tengah";
 import KananDetail from "./kanan";
 import ModalRegister from "@/app/Modals/registerModal";
+import NavbarLogin from "@/app/components/Navbar/navbarLogin";
 
 export default function DetailProduct(props: any) {
   const { params } = props;
@@ -24,7 +25,7 @@ export default function DetailProduct(props: any) {
     <>
       {isRegisterModal && <ModalRegister></ModalRegister>}
       {isLoginModal && <ModalLogin></ModalLogin>}
-      <Navbar />;
+      <NavbarLogin/>;
       <div className="mt-[5rem] justify-center flex">
         <KiriDetail products={product} />
         <TengahDetail products={product}></TengahDetail>
