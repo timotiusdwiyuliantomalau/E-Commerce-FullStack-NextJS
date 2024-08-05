@@ -13,7 +13,7 @@ export const modalSlice = createSlice({
   initialState,
   reducers: {
     openLoginModal: () => {
-      return {login:true,register:false};
+      return{login:true,register:false};
     },
     closeLoginModal:()=>{
       return {login:false,register:false};

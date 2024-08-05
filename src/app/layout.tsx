@@ -3,7 +3,6 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 import StoreProvider from "./storeProvider";
 import Navbar from "./components/Navbar/navbar";
-import { useEffect, useState } from "react";
 import { getCookie } from "../../utils/cookies";
 import NavbarLogin from "./components/Navbar/navbarLogin";
 
@@ -21,14 +20,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookie=await getCookie("login"); 
+  const authorized = await getCookie("isLogin");
   return (
     <html lang="en">
       <body className={poppins.className}>
         <StoreProvider>
-          <p>{cookie}</p>
-          {/* {cookie==="not authorized"&&<Navbar></Navbar>}
-          {cookie==="authorized"&&<NavbarLogin></NavbarLogin>} */}
+          {authorized ? <NavbarLogin /> : <Navbar />}
           {children}
         </StoreProvider>
       </body>
