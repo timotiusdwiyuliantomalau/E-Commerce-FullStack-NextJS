@@ -81,8 +81,14 @@ export async function loginUser(data: any) {
 export async function updateCart(data: any) {
   const docRef = doc(firestore, "users", data.id);
   await updateDoc(docRef, {cart:data.cart});
-  return {
-    success: true,
-    statusCode: 200,
+  try{
+    return {
+      success: true,
+      statusCode: 200,
+    }
+  }catch(error){
+    return{
+      success: false,message:error}
   }
+  
 }

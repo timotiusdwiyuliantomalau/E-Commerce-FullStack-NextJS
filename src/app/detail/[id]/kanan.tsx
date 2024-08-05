@@ -18,10 +18,11 @@ export default function KananDetail(products: any) {
   let user = JSON.parse(localStorage.getItem("user") || "");
   async function handleUpdateCart(){
     user.cart.push({product,qty})
+    console.log(user.cart);
     const result=await fetch("http://localhost:3000/api/update",{
       method:"PUT",
       body:JSON.stringify({
-        id:localStorage.getItem("id"),
+        id:user.id,
         cart:user.cart,
       }),
     })
