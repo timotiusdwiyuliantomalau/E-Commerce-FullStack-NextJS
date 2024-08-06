@@ -8,16 +8,16 @@ export default function Banner() {
   let [num, setNum] = useState(0);
   const [aksi, setAksi] = useState("");
   let number = 0;
-  useEffect(() => {
-    setInterval(() => {
-      if (number != 2) {
-        number += 0.5;
-        setBanner([banners[number]]);
-      } else {
-        number=-0.5;
-      }
-    }, 2000);
-  }, []);
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     if (number != 2) {
+  //       number += 0.5;
+  //       setBanner([banners[number]]);
+  //     } else {
+  //       number=-0.5;
+  //     }
+  //   }, 2000);
+  // }, []);
 
   return (
     <>

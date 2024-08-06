@@ -4,33 +4,35 @@ import { Edit2, MinusCircle, PlusCircle } from "react-feather";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../utils/redux/store";
 import { openLoginModal } from "../../../../utils/redux/modalSlice";
-import { getCookie, setCookie } from "../../../../utils/cookies";
+import { getCookie } from "../../../../utils/cookies";
+import { addToCart } from "../../../../utils/redux/addToCartSlice";
 export default function KananDetail(products: any) {
   const [qty, setQty] = useState(1);
   const product = products.products;
   const [isLogin, setIsLogin] = useState("");
   const dispatch = useDispatch<AppDispatch>();
-  let user = JSON.parse(localStorage.getItem("user") || "");
-  const [cart,setCart]=useState(user.cart);
+  let user =
+    localStorage.getItem("user") &&
+    JSON.parse(localStorage.getItem("user") || "");
 
   useEffect(() => {
     getCookie("isLogin").then((res) => {
       res ? setIsLogin("yes") : setIsLogin("no");
     });
   }, [isLogin]);
-  
-  async function handleUpdateCart(){
-    user.cart.push({product,qty})
-    setCart(user.cart);
-    const result=await fetch("http://localhost:3000/api/update",{
-      method:"PUT",
-      body:JSON.stringify({
-        id:user.id,
-        cart:user.cart,
+
+  async function handleUpdateCart() {
+    dispatch(addToCart({product,qty}));
+    user.cart.push({ product, qty });
+    const result = await fetch("http://localhost:3000/api/update", {
+      method: "PUT",
+      body: JSON.stringify({
+        id: user.id,
+        cart: user.cart,
       }),
-    })
-    const res=await result.json();
-    localStorage.setItem("user",JSON.stringify(res.data));
+    });
+    const res = await result.json();
+    localStorage.setItem("user", JSON.stringify(res.data));
   }
 
   return (
@@ -90,7 +92,7 @@ export default function KananDetail(products: any) {
           </p>
           <p
             onClick={() => {
-              isLogin === "yes"&&handleUpdateCart();
+              isLogin === "yes" && handleUpdateCart();
               isLogin === "no" && dispatch(openLoginModal());
             }}
             className="border-blueP border-[1px] font-bold py-3 rounded-lg text-blueP text-center hover:bg-gray-200 cursor-pointer "

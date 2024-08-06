@@ -2,20 +2,17 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Search } from "react-feather";
 import { FiShoppingCart } from "react-icons/fi";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineEmail } from "react-icons/md";
 import { deleteCookie } from "../../../../utils/cookies";
 import FixNavbar from "../fragments/content/navbar/fixNavbar";
+import { useAppsSelector } from "../../../../utils/redux/store";
 
 export default function NavbarLogin() {
   let user = JSON.parse(localStorage.getItem("user") || "");
-  const cart = user.cart.reduce(
-    (acc: any, current: any) => acc + current.qty,
-    0
-  );
-  console.log(cart);
+  const addToCartSlice=useAppsSelector(state=>state.addToCartSlice);
+  const cart = addToCartSlice.reduce((acc: any, current: any) => acc + current.qty, 0);
   return (
     <>
       <FixNavbar>
