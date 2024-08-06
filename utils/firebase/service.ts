@@ -84,7 +84,8 @@ export async function updateCart(data: any) {
   try{
     return {
       success: true,
-      statusCode: 200,
+      data,
+      statusCode:200
     }
   }catch(error){
     return{

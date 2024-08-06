@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import { MdVerified } from "react-icons/md";
-import Navbar from "../components/Navbar/navbar";
+import Navbar from "../components/Navbar/navbarUnLogin";
 import { Heart, Trash2 } from "react-feather";
 import { SlNote } from "react-icons/sl";
 import { IoIosArrowForward } from "react-icons/io";

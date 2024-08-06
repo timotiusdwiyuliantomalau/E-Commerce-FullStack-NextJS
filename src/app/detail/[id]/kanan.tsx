@@ -10,15 +10,18 @@ export default function KananDetail(products: any) {
   const product = products.products;
   const [isLogin, setIsLogin] = useState("");
   const dispatch = useDispatch<AppDispatch>();
+  let user = JSON.parse(localStorage.getItem("user") || "");
+  const [cart,setCart]=useState(user.cart);
+
   useEffect(() => {
     getCookie("isLogin").then((res) => {
       res ? setIsLogin("yes") : setIsLogin("no");
     });
   }, [isLogin]);
-  let user = JSON.parse(localStorage.getItem("user") || "");
+  
   async function handleUpdateCart(){
     user.cart.push({product,qty})
-    console.log(user.cart);
+    setCart(user.cart);
     const result=await fetch("http://localhost:3000/api/update",{
       method:"PUT",
       body:JSON.stringify({
@@ -27,7 +30,7 @@ export default function KananDetail(products: any) {
       }),
     })
     const res=await result.json();
-    console.log(res);
+    localStorage.setItem("user",JSON.stringify(res.data));
   }
 
   return (
@@ -62,7 +65,7 @@ export default function KananDetail(products: any) {
         </span>
         <span className="flex items-center justify-between">
           <p className="text-gray-600 ">Subtotal</p>
-          <p className="font-bold text-xl">
+          <p className="font-bold text-xl ">
             ${" "}
             {(product.typical_price_range[0].split("$")[1] * qty)
               .toString()
@@ -80,16 +83,16 @@ export default function KananDetail(products: any) {
         </span>
         <span className="grid gap-2 mt-2 mb-2">
           <p
-            onClick={() => {
-              isLogin === "yes"&&handleUpdateCart();
-              isLogin === "no" && dispatch(openLoginModal());
-            }}
+            onClick={() => dispatch(openLoginModal())}
             className="bg-blueP font-bold py-3 rounded-lg text-white text-center hover:opacity-90 cursor-pointer"
           >
             Beli
           </p>
           <p
-            onClick={() => dispatch(openLoginModal())}
+            onClick={() => {
+              isLogin === "yes"&&handleUpdateCart();
+              isLogin === "no" && dispatch(openLoginModal());
+            }}
             className="border-blueP border-[1px] font-bold py-3 rounded-lg text-blueP text-center hover:bg-gray-200 cursor-pointer "
           >
             + Keranjang

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import StoreProvider from "./storeProvider";
-import Navbar from "./components/Navbar/navbar";
+import Navbar from "./components/Navbar/navbarUnLogin";
 import { getCookie } from "../../utils/cookies";
 import NavbarLogin from "./components/Navbar/navbarLogin";
 
