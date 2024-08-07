@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { dataProducts } from "../../utils/fetchData";
 import AtasHomepage from "./components/Homepage/atas";
 import TengahHomepage from "./components/Homepage/tengah";
 import { useAppsSelector } from "../../utils/redux/store";
 import ModalLogin from "./Modals/loginModal";
 import ModalRegister from "./Modals/registerModal";
+import { getCookie } from "../../utils/cookies";
 
 export default function Home() {
   const styleHome = "w-[76rem] flex flex-col gap-20";

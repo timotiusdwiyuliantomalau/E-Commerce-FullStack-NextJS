@@ -22,8 +22,20 @@ export default function KananDetail(products: any) {
   }, [isLogin]);
 
   async function handleUpdateCart() {
-    dispatch(addToCart({product,qty}));
-    user.cart.push({ product, qty });
+    dispatch(addToCart({ product, qty }));
+    user.cart.length == 0 && user.cart.push({ product, qty });
+    const sameProduct = user.cart.find(
+      (data: any) => data.product.product_id == product.product_id
+    );
+    if (sameProduct) {
+      const nonSameProduct = user.cart.filter(
+        (data: any) => data.product.product_id != product.product_id
+      );
+      nonSameProduct.push({ product, qty:sameProduct.qty+qty });
+      user.cart=nonSameProduct;
+    } else {
+      return user.cart.push({ product, qty });
+    }
     const result = await fetch("http://localhost:3000/api/update", {
       method: "PUT",
       body: JSON.stringify({

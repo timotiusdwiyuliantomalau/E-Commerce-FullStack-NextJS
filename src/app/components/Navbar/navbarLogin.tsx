@@ -18,11 +18,11 @@ export default function NavbarLogin() {
       <FixNavbar>
         <main className="flex gap-8 items-center z-10">
           <span className="flex gap-4">
-            <IoMdNotificationsOutline className="w-7 h-7 opacity-60 hover:opacity-100 cursor-pointer rounded-md text-2xl" />
-            <MdOutlineEmail className="w-7 h-7 opacity-60 hover:opacity-100 cursor-pointer rounded-md p-[2px]"></MdOutlineEmail>
+            <IoMdNotificationsOutline className="w-8 h-8 opacity-60 hover:opacity-100 cursor-pointer rounded-md text-2xl" />
+            <MdOutlineEmail className="w-8 h-8 opacity-60 hover:opacity-100 cursor-pointer rounded-md p-[2px]"></MdOutlineEmail>
             <Link href="/cart" className="relative">
-              <FiShoppingCart className=" w-7 h-7 opacity-60 hover:opacity-100 cursor-pointer rounded-md p-[2px] block"></FiShoppingCart>
-              <div className="bg-red-500 text-white absolute text-sm rounded-full -right-2 scale-75 w-5 h-5 font-semibold z-10 -top-1 text-center ">
+              <FiShoppingCart className=" w-8 h-8 opacity-60 hover:opacity-100 cursor-pointer rounded-md p-[2px] block"></FiShoppingCart>
+              <div className={`bg-red-500 ${cart != 0 ? "block":"hidden"} text-white absolute text-sm rounded-full -right-2 scale-75 w-5 h-5 font-semibold z-10 -top-1 text-center`}>
                 {cart}
               </div>
             </Link>

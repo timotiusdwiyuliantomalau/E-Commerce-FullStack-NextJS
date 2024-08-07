@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export function Banner1() {
+export function Banner3() {
   return (
     <>
       <main className="flex bg-gradient-to-r from-[#FF204E] to-white justify-between items-center pr-[13rem] pl-[5rem] w-full h-[25rem] rounded-lg relative">
@@ -31,7 +31,7 @@ export function Banner1() {
     </>
   );
 }
-export function Banner2() {
+export function Banner1() {
   return (
     <>
       <main className="flex bg-gradient-to-r from-yellow-500  to-white justify-between items-center pr-[13rem] pl-[5rem] w-full h-[25rem] rounded-lg relative">
@@ -62,7 +62,7 @@ export function Banner2() {
     </>
   );
 }
-export function Banner3() {
+export function Banner2() {
   return (
     <>
       <main className="flex bg-gradient-to-r from-blue-500  to-white justify-between items-center pr-[13rem] pl-[5rem] w-full h-[25rem] rounded-lg relative">

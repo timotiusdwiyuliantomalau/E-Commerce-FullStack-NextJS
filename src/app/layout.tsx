@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import StoreProvider from "./storeProvider";
+import { cookies } from "next/headers";
 import Navbar from "./components/Navbar/navbarUnLogin";
-import { getCookie } from "../../utils/cookies";
 import NavbarLogin from "./components/Navbar/navbarLogin";
 
 export const metadata: Metadata = {
@@ -20,12 +20,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const authorized = await getCookie("isLogin");
+  const isLogin=cookies().get("isLogin");
+
   return (
     <html lang="en">
       <body className={poppins.className}>
         <StoreProvider>
-          {authorized ? <NavbarLogin /> : <Navbar />}
+          {typeof isLogin=="undefined"?<Navbar/>:<NavbarLogin/>}
           {children}
         </StoreProvider>
       </body>
