@@ -8,8 +8,9 @@ import ModalLogin from "../Modals/loginModal";
 import ModalRegister from "../Modals/registerModal";
 import { useAppsSelector } from "../../../utils/redux/store";
 import { Heart, Trash2 } from "react-feather";
+import { getCookie } from "../../../utils/cookies";
 
-export default function CartPage() {
+export default async function CartPage() {
   const isLoginModal = useAppsSelector((state) => state.modalSlice.login);
   const isRegisterModal = useAppsSelector((state) => state.modalSlice.register);
   const allCart = useAppsSelector((state) => state.addToCartSlice).reduce(
@@ -17,15 +18,15 @@ export default function CartPage() {
     0
   );
   const productsCart = JSON.parse(localStorage.getItem("user") || "").cart;
+  
 
   return (
     <>
       {isLoginModal && <ModalLogin></ModalLogin>}
       {isRegisterModal && <ModalRegister></ModalRegister>}
-      <div className="flex flex-col h-screen pt-[6rem] items-center ">
+      <div className="flex flex-col h-screen mt-[7rem] items-center ">
         <h1 className="text-2xl font-semibold w-11/12 mb-5">Keranjang Saya</h1>
         <div className="flex gap-5 w-11/12">
-
           <main className="flex flex-col w-8/12 ">
             <div className="flex justify-between bg-redP text-white rounded-md py-3 px-5 ">
               <span className="flex gap-4 items-center">
@@ -41,52 +42,56 @@ export default function CartPage() {
             <div className="bg-white flex flex-col py-5 px-5 rounded-md -mt-2 gap-2 -z-10  shadow-md">
               {productsCart.map((data: any) => (
                 <div>
-                <span className="flex gap-4 items-center">
-                  <input type="checkbox" className="w-4 h-4 rounded-md" />
-                  <span className="flex gap-1 items-center">
-                    <MdVerified className="text-blue-400"></MdVerified>
-                    <p className="font-semibold">{data.product.offer.store_name}</p>
-                  </span>
-                </span>
-                <span className="flex gap-4">
-                  <span className="flex">
+                  <span className="flex gap-4 items-center">
                     <input type="checkbox" className="w-4 h-4 rounded-md" />
+                    <span className="flex gap-1 items-center">
+                      <MdVerified className="text-blue-400"></MdVerified>
+                      <p className="font-semibold">
+                        {data.product.offer.store_name}
+                      </p>
+                    </span>
                   </span>
-                  <Image
-                    src={data.product.product_photos[0]}
-                    className="w-[6rem] h-[6rem]"
-                    alt="Gambar Produk"
-                    width={300}
-                    height={300}
-                  ></Image>
-                  <p className="font-medium w-full">{data.product.product_title}</p>
-                  <span className="grid h-[6rem] justify-between">
-                    <p className="font-semibold text-lg text-right">
-                      {parseFloat(data.product.typical_price_range[0].split("$")[1])*data.qty}
+                  <span className="flex gap-4">
+                    <span className="flex">
+                      <input type="checkbox" className="w-4 h-4 rounded-md" />
+                    </span>
+                    <Image
+                      src={data.product.product_photos[0]}
+                      className="w-[6rem] h-[6rem]"
+                      alt="Gambar Produk"
+                      width={300}
+                      height={300}
+                    ></Image>
+                    <p className="font-medium w-full">
+                      {data.product.product_title}
                     </p>
-                    <span className="flex gap-4 place-self-end items-center text-gray-500 ">
-                      <SlNote className="w-5 h-5"></SlNote>
-                      <Heart className="w-5 h-5"></Heart>
-                      <Trash2 className="w-5 h-5"></Trash2>
-                      <span className="flex gap-4 items-center border-[1px] border-gray-300 py-1 px-2 rounded-md">
-                        <BiMinus></BiMinus>
-                        <p className="text-black">{data.qty}</p>
-                        <BiPlus></BiPlus>
+                    <span className="grid h-[6rem] justify-between">
+                      <p className="font-semibold text-lg text-right">
+                        {parseFloat(
+                          data.product.typical_price_range[0].split("$")[1]
+                        ) * data.qty}
+                      </p>
+                      <span className="flex gap-4 place-self-end items-center text-gray-500 ">
+                        <SlNote className="w-5 h-5"></SlNote>
+                        <Heart className="w-5 h-5"></Heart>
+                        <Trash2 className="w-5 h-5"></Trash2>
+                        <span className="flex gap-4 items-center border-[1px] border-gray-300 py-1 px-2 rounded-md">
+                          <BiMinus></BiMinus>
+                          <p className="text-black">{data.qty}</p>
+                          <BiPlus></BiPlus>
+                        </span>
                       </span>
                     </span>
                   </span>
-                </span>
-              </div>
-              ))
-                
-              }
+                </div>
+              ))}
             </div>
           </main>
 
-          <main className="flex flex-col items-center p-8 rounded-lg gap-8 w-4/12 border-[2px] border-gray-200">
+          <main className="flex flex-col bg-yellow-300 items-center p-8 rounded-lg gap-8 w-4/12 ">
             <span className="w-full grid gap-2">
               <h1 className="font-semibold text-lg">Rincian Belanja</h1>
-              <span className="flex justify-between pb-2 border-b-[1px] border-gray-200">
+              <span className="flex justify-between pb-2 border-b-[1px] border-black border-opacity-40">
                 <p>Total</p>
                 <p className="font-semibold text-lg">Rp 20.000</p>
               </span>
@@ -104,9 +109,9 @@ export default function CartPage() {
               </span>
               <IoIosArrowForward className="text-gray-600" />{" "}
             </span>
-            <button className=" bg-blueP py-2 w-full rounded-md text-white font-semibold">
+            <a href="cart/shipment"  className=" bg-blueP text-center py-2 w-full rounded-md text-white font-semibold">
               Beli (1)
-            </button>
+            </a >
           </main>
         </div>
       </div>
