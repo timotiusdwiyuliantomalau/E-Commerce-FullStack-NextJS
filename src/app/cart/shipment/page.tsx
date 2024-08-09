@@ -30,7 +30,7 @@ export default function Shipment() {
               </span>
             </div>
 
-            <div className="flex flex-col relative p-4 shadow-md rounded-lg border-[1px] border-gray-200">
+            <div className="flex flex-col relative p-6 shadow-md rounded-lg border-[1px] border-gray-200">
               <h2 className="text-slate-600 font-semibold mb-1 text-lg ">PESANAN 1</h2>
               <span className="flex gap-1 items-center">
                 <MdVerified className="text-blue-400"></MdVerified>

@@ -27,6 +27,9 @@ export default function KananDetail(products: any) {
     const sameProduct = user.cart.find(
       (data: any) => data.product.product_id == product.product_id
     );
+    const sameStore = user.cart.find(
+      (data: any) => data.product.offer.store_name == product.offer.store_name
+    );
     if (sameProduct) {
       const nonSameProduct = user.cart.filter(
         (data: any) => data.product.product_id != product.product_id
@@ -34,7 +37,7 @@ export default function KananDetail(products: any) {
       nonSameProduct.push({ product, qty:sameProduct.qty+qty });
       user.cart=nonSameProduct;
     } else {
-      return user.cart.push({ product, qty });
+      user.cart.push({ product, qty });
     }
     const result = await fetch("http://localhost:3000/api/update", {
       method: "PUT",
