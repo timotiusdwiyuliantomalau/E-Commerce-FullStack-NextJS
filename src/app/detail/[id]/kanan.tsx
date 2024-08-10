@@ -24,18 +24,16 @@ export default function KananDetail(products: any) {
   async function handleUpdateCart() {
     dispatch(addToCart({ product, qty }));
     user.cart.length == 0 && user.cart.push({ product, qty });
-    const sameProduct = user.cart.find(
+    let sameProduct = user.cart.find(
       (data: any) => data.product.product_id == product.product_id
-    );
-    const sameStore = user.cart.find(
-      (data: any) => data.product.offer.store_name == product.offer.store_name
     );
     if (sameProduct) {
       const nonSameProduct = user.cart.filter(
         (data: any) => data.product.product_id != product.product_id
       );
-      nonSameProduct.push({ product, qty:sameProduct.qty+qty });
-      user.cart=nonSameProduct;
+      nonSameProduct.push({ product, qty: sameProduct.qty + qty });
+      user.cart = nonSameProduct;
+      console.log(user.cart);
     } else {
       user.cart.push({ product, qty });
     }

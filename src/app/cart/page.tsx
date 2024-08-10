@@ -11,6 +11,7 @@ import { Heart, Trash2 } from "react-feather";
 import { getCookie } from "../../../utils/cookies";
 import { useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa";
+import { IoStorefrontSharp } from "react-icons/io5";
 
 export default function CartPage() {
   const isLoginModal = useAppsSelector((state) => state.modalSlice.login);
@@ -33,29 +34,19 @@ export default function CartPage() {
     0
   );
 
-  async function handleCartToShipment(e: any) {
-    e.target.preventDefault();
-    fetch("http://localhost:3000/bro", {
-      method: "GET",
-      body: JSON.stringify({
-        success: e.target.allProduct.value,
-      }),
-    });
-  }
-
   return (
     <>
       {isLoginModal && <ModalLogin></ModalLogin>}
       {isRegisterModal && <ModalRegister></ModalRegister>}
       <div className="flex flex-col pt-[7rem] items-center ">
         <h1 className="text-2xl font-semibold w-11/12 mb-5">Keranjang Saya</h1>
-        <form onSubmit={handleCartToShipment} className="flex gap-5 w-11/12">
+        <form className="flex gap-5 w-11/12">
           <main className="flex flex-col w-8/12 ">
             <div className="flex justify-between bg-redP text-white rounded-md py-3 px-5 ">
               <span className="flex gap-4 items-center">
                 <span className="block w-5 h-5 overflow-hidden  relative rounded-full">
+                  <FaCheck className="block absolute  bg-green-600 w-5 h-5 p-1 top-0"></FaCheck>
                   <span className={`absolute w-5 h-5 bg-white top-0`}></span>
-                  <FaCheck className="block absolute  bg-green-600 w-5 h-5 p-1 top-0 z-10"></FaCheck>
                 </span>
                 <p className="font-semibold">
                   Pilih Semua{" "}
@@ -67,25 +58,25 @@ export default function CartPage() {
               <p className="font-semibold">Hapus</p>
             </div>
 
-            <div className="bg-white flex flex-col py-5 px-5 rounded-md -mt-2 gap-2 -z-10  shadow-md">
+            <div className="bg-white flex flex-col py-5 px-5 rounded-md -mt-1 gap-2  shadow-md">
               {productsCart.map((data: any, i: number) => (
                 <div key={i}>
                   <span className="flex gap-4 items-center">
-                    <input type="checkbox" className="w-4 h-4 rounded-md" />
                     <span className="flex gap-1 items-center">
-                      <MdVerified className="text-blue-400"></MdVerified>
+                      <IoStorefrontSharp className="text-blue-400" />
                       <p className="font-semibold">
                         {data.product.offer.store_name}
                       </p>
                     </span>
                   </span>
                   <span className="flex gap-4">
-                    <span className="flex">
-                      <input
-                        type="checkbox"
-                        name="allProduct"
-                        className="w-4 h-4 rounded-md"
-                      />
+                    <span className="flex cursor-pointer ">
+                      <span onClick={(e:any) => {e.target.classList.toggle('hidden')}}  className="block w-5 h-5 overflow-hidden bg-red-200  relative rounded-full ">
+                        <FaCheck className="block absolute text-white  bg-green-600 w-5 h-5 p-1 top-0"></FaCheck>
+                        <span 
+                          className={`absolute w-5 h-5 bg-white top-0`}
+                        ></span>
+                      </span>
                     </span>
                     <Image
                       src={data.product.product_photos[0]}

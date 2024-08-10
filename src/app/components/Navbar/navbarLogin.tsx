@@ -12,6 +12,7 @@ import { useAppsSelector } from "../../../../utils/redux/store";
 export default function NavbarLogin() {
   let user = JSON.parse(localStorage.getItem("user") || "");
   const addToCartSlice=useAppsSelector(state=>state.addToCartSlice);
+  console.log(addToCartSlice);
   const cart = addToCartSlice.reduce((acc: any, current: any) => acc + current.qty, 0);
   return (
     <>
