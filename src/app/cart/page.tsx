@@ -9,7 +9,7 @@ import ModalRegister from "../Modals/registerModal";
 import { useAppsSelector } from "../../../utils/redux/store";
 import { Heart, Trash2 } from "react-feather";
 import { getCookie } from "../../../utils/cookies";
-import { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import { IoStorefrontSharp } from "react-icons/io5";
 
@@ -21,6 +21,15 @@ export default function CartPage() {
     0
   );
   const [productsCart, setProductsCart] = useState([]);
+  const [listCart, setListCart] = useState(Array);
+  const itemsRef = useRef<Array<HTMLDivElement | null>>([]);
+  const itemsChecked = useRef<Array<HTMLDivElement | null>>([]);
+
+  useEffect(() => {
+    itemsRef.current = itemsRef.current.slice(0, productsCart.length);
+    
+  }, [productsCart]);
+
   useEffect(() => {
     getCookie("isLogin").then((res) => {
       if (res)
@@ -40,13 +49,20 @@ export default function CartPage() {
       {isRegisterModal && <ModalRegister></ModalRegister>}
       <div className="flex flex-col pt-[7rem] items-center ">
         <h1 className="text-2xl font-semibold w-11/12 mb-5">Keranjang Saya</h1>
-        <form className="flex gap-5 w-11/12">
+        <div className="flex gap-5 w-11/12">
           <main className="flex flex-col w-8/12 ">
             <div className="flex justify-between bg-redP text-white rounded-md py-3 px-5 ">
-              <span className="flex gap-4 items-center">
-                <span className="block w-5 h-5 overflow-hidden  relative rounded-full">
+              <span className="flex gap-4 items-center ">
+                <span className="block w-5 h-5 overflow-hidden  relative rounded-full ">
                   <FaCheck className="block absolute  bg-green-600 w-5 h-5 p-1 top-0"></FaCheck>
-                  <span className={`absolute w-5 h-5 bg-white top-0`}></span>
+                  <input
+                    type="checkbox"
+                    onClick={() => {
+                      itemsChecked.current = itemsRef.current.slice(0, productsCart.length);
+                      productsCart&&itemsChecked.current[1]?.removeAttribute("hidden");
+                    }}
+                    className={`group absolute w-5 h-5 bg-white top-0 checked:opacity-0 opacity-100 cursor-pointer`}
+                  ></input>
                 </span>
                 <p className="font-semibold">
                   Pilih Semua{" "}
@@ -71,11 +87,20 @@ export default function CartPage() {
                   </span>
                   <span className="flex gap-4">
                     <span className="flex cursor-pointer ">
-                      <span onClick={(e:any) => {e.target.classList.toggle('hidden')}}  className="block w-5 h-5 overflow-hidden bg-red-200  relative rounded-full ">
-                        <FaCheck className="block absolute text-white  bg-green-600 w-5 h-5 p-1 top-0"></FaCheck>
-                        <span 
-                          className={`absolute w-5 h-5 bg-white top-0`}
-                        ></span>
+                      <span className="block w-5 h-5 overflow-hidden  relative rounded-full cursor-pointer">
+                        <FaCheck className="block absolute  bg-green-600 w-5 h-5 p-1 top-0 text-white"></FaCheck>
+                        <input
+                          type="checkbox"
+                          onChange={(e) => {
+                            e.target.checked;
+                          }}
+                          ref={(el:any) => (itemsRef.current[i] = el)}
+                          className={`absolute w-7 h-7 bg-white -left-1 -top-1 checked:opacity-0 opacity-100 cursor-pointer `}
+                        ></input>
+                        <span  ref={(el:any) => (itemsChecked.current[i] = el)} className="flex absolute  bg-green-600 w-5 h-5 p-1 top-0 -left-0 text-white">
+                        <FaCheck ></FaCheck>
+                        </span>
+                        
                       </span>
                     </span>
                     <Image
@@ -138,7 +163,7 @@ export default function CartPage() {
               className=" bg-blueP text-center py-2 w-full rounded-md text-white font-semibold"
             ></input>
           </main>
-        </form>
+        </div>
       </div>
     </>
   );
