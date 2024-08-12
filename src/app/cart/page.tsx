@@ -1,17 +1,18 @@
 "use client";
 import Image from "next/image";
 import { BiMinus, BiPlus } from "react-icons/bi";
-import { MdVerified } from "react-icons/md";
 import { SlNote } from "react-icons/sl";
 import { IoIosArrowForward } from "react-icons/io";
 import ModalLogin from "../Modals/loginModal";
 import ModalRegister from "../Modals/registerModal";
 import { useAppsSelector } from "../../../utils/redux/store";
 import { Heart, Trash2 } from "react-feather";
-import { getCookie } from "../../../utils/cookies";
-import React, { useEffect, useRef, useState } from "react";
+import { getCookie, setCookie } from "../../../utils/cookies";
+import React, { useEffect,useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import { IoStorefrontSharp } from "react-icons/io5";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function CartPage() {
   const isLoginModal = useAppsSelector((state) => state.modalSlice.login);
@@ -22,13 +23,9 @@ export default function CartPage() {
   );
   const [productsCart, setProductsCart] = useState([]);
   const [listCart, setListCart] = useState(Array);
-  const itemsRef = useRef<Array<HTMLDivElement | null>>([]);
-  const itemsChecked = useRef<Array<HTMLDivElement | null>>([]);
-
-  useEffect(() => {
-    itemsRef.current = itemsRef.current.slice(0, productsCart.length);
-    
-  }, [productsCart]);
+  const [checkboxChecked, setCheckboxChecked] = useState(false);
+  const [dinamicQty, setDinamicQty] = useState<any[]>([]);
+  const router=useRouter();
 
   useEffect(() => {
     getCookie("isLogin").then((res) => {
@@ -37,11 +34,21 @@ export default function CartPage() {
     });
   }, []);
 
-  const priceCart = productsCart.reduce(
+  // useEffect(() => {
+  //   if(productsCart.length>0){
+  //   for(let i=0;i<productsCart.length;i++){
+
+  //   //   setDinamicQty([...dinamicQty,productsCart[i].qty])
+  //   }}
+  //   },[productsCart,dinamicQty]);
+  //   console.log(dinamicQty);
+
+  const priceCart = listCart.reduce(
     (acc: number, curr: any) =>
-      acc + parseFloat(curr.product.typical_price_range[0].split("$")[1]),
+      acc + (parseFloat(curr.product.typical_price_range[0].split("$")[1])*curr.qty),
     0
   );
+
 
   return (
     <>
@@ -57,9 +64,16 @@ export default function CartPage() {
                   <FaCheck className="block absolute  bg-green-600 w-5 h-5 p-1 top-0"></FaCheck>
                   <input
                     type="checkbox"
-                    onClick={() => {
-                      itemsChecked.current = itemsRef.current.slice(0, productsCart.length);
-                      productsCart&&itemsChecked.current[1]?.removeAttribute("hidden");
+                    onClick={(e: any) => {
+                      setCheckboxChecked(!checkboxChecked);
+                      if (e.target.id) {
+                        e.target.removeAttribute("id");
+                        return setListCart([]);
+                      }
+                      setListCart(
+                        productsCart.map((data: any) => data)
+                      );
+                      e.target.setAttribute("id", 1);
                     }}
                     className={`group absolute w-5 h-5 bg-white top-0 checked:opacity-0 opacity-100 cursor-pointer`}
                   ></input>
@@ -74,7 +88,7 @@ export default function CartPage() {
               <p className="font-semibold">Hapus</p>
             </div>
 
-            <div className="bg-white flex flex-col py-5 px-5 rounded-md -mt-1 gap-2  shadow-md">
+            <div className="bg-white flex flex-col pt-5 pb-8 px-5 rounded-md -mt-1 gap-7 shadow-md">
               {productsCart.map((data: any, i: number) => (
                 <div key={i}>
                   <span className="flex gap-4 items-center">
@@ -89,18 +103,111 @@ export default function CartPage() {
                     <span className="flex cursor-pointer ">
                       <span className="block w-5 h-5 overflow-hidden  relative rounded-full cursor-pointer">
                         <FaCheck className="block absolute  bg-green-600 w-5 h-5 p-1 top-0 text-white"></FaCheck>
-                        <input
-                          type="checkbox"
-                          onChange={(e) => {
-                            e.target.checked;
-                          }}
-                          ref={(el:any) => (itemsRef.current[i] = el)}
-                          className={`absolute w-7 h-7 bg-white -left-1 -top-1 checked:opacity-0 opacity-100 cursor-pointer `}
-                        ></input>
-                        <span  ref={(el:any) => (itemsChecked.current[i] = el)} className="flex absolute  bg-green-600 w-5 h-5 p-1 top-0 -left-0 text-white">
-                        <FaCheck ></FaCheck>
-                        </span>
-                        
+                        {!checkboxChecked && (
+                          <input
+                            type="checkbox"
+                            className={`${
+                              checkboxChecked && "hidden"
+                            } absolute w-7 h-7 bg-white -left-1 -top-1 checked:opacity-0 opacity-100 cursor-pointer `}
+                            onClick={() => {
+                              setListCart([...listCart, data]);
+                              if (
+                                listCart.find(
+                                  (items: any) =>
+                                    items.product.product_id == data.product.product_id
+                                )
+                              )
+                                return setListCart(
+                                  listCart.filter(
+                                    (items: any) =>
+                                      items.product.product_id !=
+                                      data.product.product_id
+                                  )
+                                );
+                            }}
+                          ></input>
+                        )}
+                        {checkboxChecked && (
+                          <>
+                            <input
+                              type="checkbox"
+                              className={`absolute w-7 h-7 bg-white -left-1 -top-1 checked:opacity-0 opacity-100 cursor-pointer `}
+                              onClick={() => {
+                                setListCart([...listCart, data]);
+                                if (
+                                  listCart.find(
+                                    (items: any) =>
+                                      items.product.product_id ==
+                                      data.product.product_id
+                                  )
+                                )
+                                  return setListCart(
+                                    listCart.filter(
+                                      (items: any) =>
+                                        items.product.product_id !=
+                                        data.product.product_id
+                                    )
+                                  );
+                              }}
+                            ></input>
+                            <span
+                              id="check"
+                              onClick={(e: any) => {
+                                if (e.target.parentElement.id == "check") {
+                                  e.target.parentElement.classList.toggle(
+                                    "hidden"
+                                  );
+                                  setListCart(
+                                    listCart.filter(
+                                      (items: any) =>
+                                        items.product.product_id !=
+                                        data.product.product_id
+                                    )
+                                  );
+                                  if (
+                                    !listCart.find(
+                                      (items: any) =>
+                                        items.product.product_id ==
+                                        data.product.product_id
+                                    )
+                                  )
+                                    return setListCart([
+                                      ...listCart,
+                                      data,
+                                    ]);
+                                } else if (
+                                  e.target.parentElement.parentElement.id ==
+                                  "check"
+                                ) {
+                                  e.target.parentElement.parentElement.classList.toggle(
+                                    "hidden"
+                                  );
+                                  setListCart(
+                                    listCart.filter(
+                                      (items: any) =>
+                                        items.product.product_id !=
+                                        data.product.product_id
+                                    )
+                                  );
+                                  if (
+                                    !listCart.find(
+                                      (items: any) =>
+                                        items.product.product_id ==
+                                        data.product.product_id
+                                    )
+                                  )
+                                    return setListCart([
+                                      ...listCart,
+                                      data,
+                                    ]);
+                                }
+                              }}
+                              className="flex items-center absolute  bg-green-600 w-5 h-5 p-1 top-0 text-white"
+                            >
+                              <FaCheck></FaCheck>
+                            </span>
+                          </>
+                        )}
                       </span>
                     </span>
                     <Image
@@ -110,12 +217,12 @@ export default function CartPage() {
                       width={300}
                       height={300}
                     ></Image>
-                    <p className="font-medium w-full">
+                    <Link href={`/detail/${data.product.product_id}`} className="font-medium w-full hover:underline">
                       {data.product.product_title}
-                    </p>
+                    </Link>
                     <span className="grid h-[6rem] justify-between">
                       <p className="font-semibold text-lg text-right">
-                        {parseFloat(
+                        $ {parseFloat(
                           data.product.typical_price_range[0].split("$")[1]
                         ) * data.qty}
                       </p>
@@ -123,10 +230,10 @@ export default function CartPage() {
                         <SlNote className="w-5 h-5"></SlNote>
                         <Heart className="w-5 h-5"></Heart>
                         <Trash2 className="w-5 h-5"></Trash2>
-                        <span className="flex gap-4 items-center border-[1px] border-gray-300 py-1 px-2 rounded-md">
-                          <BiMinus></BiMinus>
+                        <span className="  flex gap-4 items-center border-[1px] border-gray-300 py-1 px-2 rounded-md">
+                          <BiMinus className="hover:bg-gray-200 cursor-pointer rounded-md"></BiMinus>
                           <p className="text-black">{data.qty}</p>
-                          <BiPlus></BiPlus>
+                          <BiPlus className="hover:bg-gray-200 cursor-pointer rounded-md"></BiPlus>
                         </span>
                       </span>
                     </span>
@@ -141,7 +248,7 @@ export default function CartPage() {
               <h1 className="font-semibold text-lg">Rincian Belanja</h1>
               <span className="flex justify-between pb-2 border-b-[1px] border-black border-opacity-40">
                 <p>Total</p>
-                <p className="font-semibold text-lg">$ {priceCart}</p>
+                <p className="font-semibold text-lg">$ {priceCart.toString().substring(0,5)}</p>
               </span>
             </span>
             <span className="flex justify-between w-full bg-red-100 border-2 border-redP py-3 rounded-md gap-2 items-center cursor-pointer p-4">
@@ -158,9 +265,16 @@ export default function CartPage() {
               <IoIosArrowForward className="text-gray-600" />{" "}
             </span>
             <input
-              type="submit"
+            type="submit"
+              onClick={() => {
+                if(listCart.length>0){
+                localStorage.setItem("cartShipment", JSON.stringify(listCart));
+                router.push("/cart/shipment");}else{
+                  alert("Silahkan pilih produk terlebih dahulu")
+                }
+              }}
               value={"Beli"}
-              className=" bg-blueP text-center py-2 w-full rounded-md text-white font-semibold"
+              className=" cursor-pointer bg-blueP text-center py-2 w-full rounded-md text-white font-semibold"
             ></input>
           </main>
         </div>

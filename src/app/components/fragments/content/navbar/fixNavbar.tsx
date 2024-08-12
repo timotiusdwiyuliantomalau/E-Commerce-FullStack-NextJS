@@ -4,10 +4,9 @@ import { Search } from "react-feather";
 export default function FixNavbar({children}:any) {
   return (
     <>
-      <div className="fixed flex w-full top-0 justify-between px-12 py-4 items-center bg-white z-10 overflow-hidden">
+      <div className="bg-white fixed flex w-full top-0 justify-between px-12 items-center h-[5.5em]   z-10 overflow-hidden">
         <main className="flex gap-[5rem] absolute -right-[15rem]">
-          {/* <div className="w-[10rem] h-screen bg-gradient-to-tr from-green-300 to to-white blur-xl opacity-40 rounded-full left-0  rotate-[30deg] -translate-x-[28rem] -z-10"></div> */}
-          <div className="w-[20rem] h-screen bg-gradient-to-l from-red-100 to-white blur-xl opacity-60 rounded-full rotate-[30deg] -translate-x-[6rem]"></div>
+          <div className="w-[20rem] h-screen bg-gradient-to-l from-red-200 to-white blur-xl opacity-60 rounded-full rotate-[30deg] -translate-x-[6rem]"></div>
           <div className="w-[25rem] h-screen bg-gradient-to-tr from-blue-200 to to-blue-100 blur-xl opacity-40 rounded-full translate-x-24  rotate-[45deg] -z-10"></div>
         </main>
 
