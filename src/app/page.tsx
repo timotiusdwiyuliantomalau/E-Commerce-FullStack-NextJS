@@ -9,7 +9,7 @@ import ModalLogin from "./Modals/loginModal";
 import ModalRegister from "./Modals/registerModal";
 
 export default function Home() {
-  const styleHome = "w-[76rem] flex flex-col gap-20";
+  const styleHome = "w-[76rem] flex flex-col gap-32 items-center";
   useEffect(() => {
     localStorage.getItem("products") != null
       ? localStorage.getItem("products")
@@ -26,8 +26,8 @@ export default function Home() {
       <div>
         {isLoginModal && <ModalLogin></ModalLogin>}
         {isRegisterModal && <ModalRegister></ModalRegister>}
-        <div className="grid gap-28">
-          <AtasHomepage homeClassName={styleHome}></AtasHomepage>
+        <div className="flex flex-col gap-32">
+          <AtasHomepage homeClassName={"flex flex-col gap-32 items-center"}></AtasHomepage>
           <TengahHomepage homeClassName={styleHome}></TengahHomepage>
         </div>
       </div>

@@ -1,9 +1,9 @@
 import Image from "next/image";
 
-export default function Kategori() {
+export default function Kategori(width:any) {
   return (
     <>
-      <main className="flex flex-col w-full min-h-screen mb-5">
+      <main className={`flex flex-col ${width.width}`}>
         <h1 className="text-left text-2xl font-semibold w-full mb-10">
           Kategori Pilihan
         </h1>

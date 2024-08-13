@@ -19,10 +19,5 @@ export default function Banner() {
   //   }, 2000);
   // }, []);
 
-  return (
-    <>
-      {banner[0] ?? banners[0]}
-      <p>{aksi}</p>
-    </>
-  );
+  return <>{banner[0] ?? banners[0]}</>;
 }

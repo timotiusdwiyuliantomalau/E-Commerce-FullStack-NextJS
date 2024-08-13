@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 
-export default function KejarDiskon() {
+export default function KejarDiskon(width:any) {
   const [soon, setSoon] = useState(Date.now() + 2 * 1000);
   const [time, setTime] = useState(0);
   const countdownAnimate = React.useRef<HTMLInputElement>(null);
@@ -30,7 +30,7 @@ export default function KejarDiskon() {
 
   return (
     <>
-      <div className="w-full">
+      <div className={width.width}>
         <main className="flex items-end gap-3 mb-3">
           <h1 className="text-left text-2xl font-semibold">
             Kejar Diskon Spesial

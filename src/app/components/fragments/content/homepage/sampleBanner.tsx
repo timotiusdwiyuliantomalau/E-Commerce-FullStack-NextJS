@@ -3,7 +3,7 @@ import Image from "next/image";
 export function Banner3() {
   return (
     <>
-      <main className="flex bg-gradient-to-r from-[#FF204E] to-white justify-between items-center pr-[13rem] pl-[5rem] w-full h-[25rem] rounded-lg relative">
+      <main className="flex bg-gradient-to-r min-h-screen from-redP to-white justify-between items-center pr-[13rem] pl-[5rem] w-full h-[25rem] rounded-lg relative">
         <span className="flex flex-col">
           <h1 className="text-7xl font-semibold text-black">DISKON 30%</h1>
           <h2 className="text-4xl font-medium text-white w-[30rem]">
@@ -34,7 +34,7 @@ export function Banner3() {
 export function Banner1() {
   return (
     <>
-      <main className="flex bg-gradient-to-r from-yellow-500  to-white justify-between items-center pr-[13rem] pl-[5rem] w-full h-[25rem] rounded-lg relative">
+      <main className="flex bg-gradient-to-r min-h-screen from-yellow-500  to-white justify-between items-center pr-[13rem] pl-[5rem] w-full h-[25rem] rounded-lg relative">
         <span className="flex flex-col">
           <h1 className="text-7xl font-semibold text-black">DISKON 15%</h1>
           <h2 className="text-4xl font-medium text-white w-[30rem]">
@@ -65,7 +65,7 @@ export function Banner1() {
 export function Banner2() {
   return (
     <>
-      <main className="flex bg-gradient-to-r from-blue-500  to-white justify-between items-center pr-[13rem] pl-[5rem] w-full h-[25rem] rounded-lg relative">
+      <main className="flex bg-gradient-to-r min-h-screen from-blue-500  to-white justify-between items-center pr-[13rem] pl-[5rem] w-full h-[25rem] rounded-lg relative">
         <span className="flex flex-col">
           <h1 className="text-7xl font-semibold text-black">DISKON 20%</h1>
           <h2 className="text-4xl font-medium text-white w-[30rem]">
