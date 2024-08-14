@@ -3,20 +3,17 @@ import { useEffect, useState } from "react";
 import { district, province, regency } from "../../../utils/fetchLocation";
 
 export default function locationFormModal() {
-  const [location, setLocation] = useState(Array);
+  const [province, setProvince] = useState(Array);
 
   useEffect(() => {
-    // getLocation().then((res:any) => setLocation(res));
     async function getLocation() {
       const dataProvince = await province();
       const dataRegency = await regency();
       const dataDistrict = await district(dataRegency?.data.id);
-      setLocation([dataProvince, dataRegency, dataDistrict]);
+      setProvince([dataProvince, dataRegency, dataDistrict]);
     }
     getLocation();
   }, []);
-
-  console.log(location);
 
   return (
     <>
@@ -24,8 +21,8 @@ export default function locationFormModal() {
         <div className="">
           <h1>Modal</h1>
           <form className="flex flex-col" action="">
-            {location.length > 0 &&
-              location.map((data: any) => (
+            {province.length > 0 &&
+              province.map((data: any) => (
                 <>
                   <label htmlFor="provinsi">{data.type}</label>
                   <select
