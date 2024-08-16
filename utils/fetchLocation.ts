@@ -12,7 +12,7 @@ export const province = async () => {
   return result;
 };
 
-export const regency = (idRegency:number) => {
+export const regency = (idRegency:any) => {
   const result = fetch(
     `https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${idRegency}.json`
   ).then(async (res) => {
@@ -26,7 +26,7 @@ export const regency = (idRegency:number) => {
   return result;
 };
 
-export const district = (idDistrict:number) => {
+export const district = (idDistrict:any) => {
     const result = fetch(
       `https://www.emsifa.com/api-wilayah-indonesia/api/districts/${idDistrict}.json`
     ).then(async (res) => {
