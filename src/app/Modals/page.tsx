@@ -12,9 +12,9 @@ export default function locationFormModal() {
     async function getLocation() {
       const dataProvince = await province();
       dataProvince && setProvinces(dataProvince);
-      if(id.length>0){
+      if (id.length == 1) {
         setRegencies(await regency(id[0]));
-      }if(id.length>1){
+      } else if (id.length == 2) {
         setDistricts(await district(id[1]));
       }
     }
@@ -28,29 +28,60 @@ export default function locationFormModal() {
           <h1>Modal</h1>
           <form className="flex flex-col" action="">
             <label htmlFor="provinsi">Provinsi</label>
-            <select name="" className="cursor-pointer" onChange={(e:any)=>SetId([...id,e.target.value])} id="">
+            <select
+              name=""
+              className="cursor-pointer"
+              onChange={(e: any) => e.target.value && SetId([e.target.value])}
+              id=""
+            >
+              <option value="">pilih provinsi</option>
               {provinces.length > 0 &&
-                provinces.map((data: any,i:number) => (
-                  <option key={i} value={data.id}>{data.name}</option>
+                provinces.map((data: any, i: number) => (
+                  <option key={i} value={data.id}>
+                    {data.name}
+                  </option>
                 ))}
             </select>
-            {regencies.length>0&&(
-              <>
-              <label htmlFor="provinsi">Kota/Kabupaten</label>
-            <select name="" className="cursor-pointer" onChange={(e:any)=>SetId([...id,e.target.value])} id="">
-              {regencies.map((data: any,i:number) => (
-                  <option key={i} value={data.id}>{data.name}</option>
+
+            <label htmlFor="provinsi">Kota/Kabupaten</label>
+            {regencies.length > 0 ? (
+              <select
+                name=""
+                className="cursor-pointer"
+                onChange={(e: any) => e.target.value && SetId([id[0], e.target.value])}
+                id=""
+              >
+                <option value="">pilih kota/kab</option>
+                {regencies.map((data: any, i: number) => (
+                  <option key={i} value={data.id}>
+                    {data.name}
+                  </option>
                 ))}
-            </select>
-            </>
+              </select>
+            ) : (
+              <select
+                name=""
+                disabled
+                className="cursor-pointer"
+                onChange={(e: any) => SetId([id[0], e.target.value])}
+                id=""
+              >
+                <option value="">pilih kota/kab</option>
+              </select>
             )}
-            <select name="" className="cursor-pointer" onChange={(e:any)=>SetId([...id,e.target.value])} id="">
-              {districts.length > 0 &&
-                districts.map((data: any,i:number) => (
-                  <option key={i} value={data.id}>{data.name}</option>
-                ))}
+
+            <label htmlFor="provinsi">Kecamatan</label>
+            <select name="" className="cursor-pointer" id="">
+              <option value="">pilih kecamatan</option>
+              {districts.map((data: any, i: number) => (
+                <option key={i} value={data.id}>
+                  {data.name}
+                </option>
+              ))}
             </select>
-            <label htmlFor="Kode Pos"></label>
+
+            <label htmlFor="Kode Pos">Kode Pos</label>
+            <input type="text" name="Kode Pos" id="Kode Pos" />
             <label htmlFor="">Alamat Lengkap :</label>
             <input type="text" name="" id="" />
             <input type="submit" value="Submit" className="bg-blueP" />

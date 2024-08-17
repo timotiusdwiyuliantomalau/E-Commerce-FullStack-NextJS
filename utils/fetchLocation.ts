@@ -31,7 +31,7 @@ export const district = (idDistrict:any) => {
       `https://www.emsifa.com/api-wilayah-indonesia/api/districts/${idDistrict}.json`
     ).then(async (res) => {
       try {
-        const response = { type: "Provinsi", data: await res.json() };
+        const response = await res.json();
         return response;
       } catch (err) {
         console.log(err);
