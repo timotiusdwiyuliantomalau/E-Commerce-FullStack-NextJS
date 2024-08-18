@@ -25,7 +25,7 @@ export default function locationFormModal() {
     <>
       <main className="pt-[6rem]">
         <div className="">
-          <h1>Modal</h1>
+          <h1>Alamat Penerima</h1>
           <form className="flex flex-col" action="">
             <label htmlFor="provinsi">Provinsi</label>
             <select
@@ -69,22 +69,27 @@ export default function locationFormModal() {
                 <option value="">pilih kota/kab</option>
               </select>
             )}
-
             <label htmlFor="provinsi">Kecamatan</label>
-            <select name="" className="cursor-pointer" id="">
+            {districts.length>0?<select name="" className="cursor-pointer" id="">
               <option value="">pilih kecamatan</option>
               {districts.map((data: any, i: number) => (
                 <option key={i} value={data.id}>
                   {data.name}
                 </option>
               ))}
-            </select>
-
+            </select>:<select name="" className="cursor-pointer" disabled id="">
+              <option value="">pilih kecamatan</option>
+              {districts.map((data: any, i: number) => (
+                <option key={i} value={data.id}>
+                  {data.name}
+                </option>
+              ))}
+            </select>}
             <label htmlFor="Kode Pos">Kode Pos</label>
             <input type="text" name="Kode Pos" id="Kode Pos" />
             <label htmlFor="">Alamat Lengkap :</label>
             <input type="text" name="" id="" />
-            <input type="submit" value="Submit" className="bg-blueP" />
+            <input type="submit" value="Submit" className="bg-blueP cursor-pointer text-white" />
           </form>
         </div>
       </main>
