@@ -46,6 +46,7 @@ export async function registerUser(data: any) {
     email: data.email,
     password: data.password,
     cart:[],
+    location:{},
   });
   return {
     success: true,
@@ -91,5 +92,19 @@ export async function updateCart(data: any) {
     return{
       success: false,message:error}
   }
-  
+}
+
+export async function updateData(data: any) {
+  const docRef = doc(firestore, "users", data.id);
+  await updateDoc(docRef, data.data);
+  try{
+    return {
+      success: true,
+      data:data.data.location,
+      statusCode:200
+    }
+  }catch(error){
+    return{
+      success: false,message:error}
+  }
 }
