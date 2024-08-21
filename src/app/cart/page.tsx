@@ -24,8 +24,8 @@ export default function CartPage() {
   const [productsCart, setProductsCart] = useState([]);
   const [listCart, setListCart] = useState(Array);
   const [checkboxChecked, setCheckboxChecked] = useState(false);
-  const [dinamicQty, setDinamicQty] = useState<any[]>([]);
   const router=useRouter();
+  const idUser=JSON.parse(localStorage.getItem("user")||"").id;
 
   useEffect(() => {
     getCookie("isLogin").then((res) => {
@@ -34,20 +34,20 @@ export default function CartPage() {
     });
   }, []);
 
-  // useEffect(() => {
-  //   if(productsCart.length>0){
-  //   for(let i=0;i<productsCart.length;i++){
-
-  //   //   setDinamicQty([...dinamicQty,productsCart[i].qty])
-  //   }}
-  //   },[productsCart,dinamicQty]);
-  //   console.log(dinamicQty);
-
   const priceCart = listCart.reduce(
     (acc: number, curr: any) =>
       acc + (parseFloat(curr.product.typical_price_range[0].split("$")[1])*curr.qty),
     0
   );
+
+  async function handleRemoveCart(e: any) {
+    const result = await fetch("http://localhost:3000/api/deleteById", {
+      method:"DELETE",
+      body:JSON.stringify({id:idUser})
+    })
+    const res=await result.json();
+    console.log(res);
+  }
 
 
   return (
@@ -229,7 +229,7 @@ export default function CartPage() {
                       <span className="flex gap-4 place-self-end items-center text-gray-500 ">
                         <SlNote className="w-5 h-5"></SlNote>
                         <Heart className="w-5 h-5"></Heart>
-                        <Trash2 className="w-5 h-5"></Trash2>
+                        <Trash2 onClick={handleRemoveCart} className="w-5 h-5"></Trash2>
                         <span className="  flex gap-4 items-center border-[1px] border-gray-300 py-1 px-2 rounded-md">
                           <BiMinus className="hover:bg-gray-200 cursor-pointer rounded-md"></BiMinus>
                           <p className="text-black">{data.qty}</p>

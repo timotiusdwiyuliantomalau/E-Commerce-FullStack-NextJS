@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { district, province, regency } from "../../../utils/fetchLocation";
 import { setCookie } from "../../../utils/cookies";
 import { updateData } from "../../../utils/firebase/service";
+import { action } from "../../../utils/redux/actionSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../utils/redux/store";
 
 export default function locationFormModal() {
   const [provinces, setProvinces] = useState(Array);
@@ -10,6 +13,7 @@ export default function locationFormModal() {
   const [regencies, setRegencies] = useState(Array);
   const [districts, setDistricts] = useState(Array);
   let user = JSON.parse(localStorage.getItem("user") || "");
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     async function getLocation() {
@@ -46,11 +50,12 @@ export default function locationFormModal() {
       "user",
       JSON.stringify({ id: user.id, cart: user.cart, location: res.data })
     );
+    dispatch(action())
   }
 
   return (
     <>
-      <div className="pt-[6rem] flex bg-black justify-center min-h-screen bg-opacity-70">
+      <div className="pt-[6rem] flex bg-black justify-center min-h-screen bg-opacity-80">
         <main className="w-1/3 flex flex-col p-10 bg-white h-full">
           <h1 className="text-2xl font-semibold mb-3 place-self-center">
             Alamat Penerima
@@ -171,7 +176,7 @@ export default function locationFormModal() {
                 Alamat Lengkap
               </label>
               <input
-                className="border-[1px] border-gray-400 rounded-md pl-2"
+                className="border-[1px] border-gray-400 rounded-md pl-2 text-sm p-1"
                 required
                 name="alamat_lengkap"
                 id=""

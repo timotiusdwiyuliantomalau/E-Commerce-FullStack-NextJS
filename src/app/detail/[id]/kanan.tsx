@@ -33,7 +33,6 @@ export default function KananDetail(products: any) {
       );
       nonSameProduct.push({ product, qty: sameProduct.qty + qty });
       user.cart = nonSameProduct;
-      console.log(user.cart);
     } else {
       user.cart.push({ product, qty });
     }
@@ -41,11 +40,12 @@ export default function KananDetail(products: any) {
       method: "PUT",
       body: JSON.stringify({
         id: user.id,
-        cart: user.cart,
+        data: { cart: user.cart },
       }),
     });
+    console.log(user.cart);
     const res = await result.json();
-    localStorage.setItem("user", JSON.stringify(res.data));
+    localStorage.setItem("user", JSON.stringify({id:user.id,cart:user.cart,location:user.location}));
   }
 
   return (

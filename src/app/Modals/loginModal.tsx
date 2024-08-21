@@ -25,7 +25,7 @@ export default function ModalLogin() {
     const res = await result.json();
     setErrorLogin(res.message);
     if (res.success === true) {
-      localStorage.setItem("user",JSON.stringify({id:res.user[0].id,cart:res.user[0].cart}))
+      localStorage.setItem("user",JSON.stringify({id:res.user[0].id,cart:res.user[0].cart,location:res.user[0].location}))
       setCookie("isLogin", "yes", 1000 * 60 * 60).then(res=>{
         if(res) window.location.href = "/";
       })

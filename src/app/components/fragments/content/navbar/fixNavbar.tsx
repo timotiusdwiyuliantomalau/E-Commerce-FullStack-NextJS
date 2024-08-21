@@ -7,7 +7,7 @@ export default function FixNavbar({children}:any) {
       <div className="bg-white fixed flex w-full top-0 justify-between px-12 items-center h-[5.5em]   z-10 overflow-hidden">
         <main className="flex gap-[5rem] absolute -right-[15rem]">
           <div className="w-[20rem] h-screen bg-gradient-to-l from-red-200 to-white blur-xl opacity-60 rounded-full rotate-[30deg] -translate-x-[6rem]"></div>
-          <div className="w-[25rem] h-screen bg-gradient-to-tr from-blue-200 to to-blue-100 blur-xl opacity-40 rounded-full translate-x-24  rotate-[45deg] -z-10"></div>
+          <div className="w-[25rem] h-screen bg-gradient-to-tr from-blue-200 to to-blue-200 blur-xl opacity-40 rounded-full translate-x-24  rotate-[45deg] -z-10"></div>
         </main>
 
         <main className="flex gap-8 items-center z-10">

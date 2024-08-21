@@ -9,6 +9,7 @@ import {
   query,
   where,
   updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 
 const firestore = getFirestore(app);
@@ -46,7 +47,6 @@ export async function registerUser(data: any) {
     email: data.email,
     password: data.password,
     cart:[],
-    location:{},
   });
   return {
     success: true,
@@ -79,13 +79,13 @@ export async function loginUser(data: any) {
   }
 }
 
-export async function updateCart(data: any) {
+
+export async function updateData(data: any) {
   const docRef = doc(firestore, "users", data.id);
-  await updateDoc(docRef, {cart:data.cart});
+  await updateDoc(docRef, data.data);
   try{
     return {
       success: true,
-      data,
       statusCode:200
     }
   }catch(error){
@@ -94,17 +94,15 @@ export async function updateCart(data: any) {
   }
 }
 
-export async function updateData(data: any) {
-  const docRef = doc(firestore, "users", data.id);
-  await updateDoc(docRef, data.data);
+export async function deleteById(data: any) {
+  const docRef=doc(firestore,"users",data.id);
+  await deleteDoc(docRef);
   try{
-    return {
+    return{
       success: true,
-      data:data.data.location,
       statusCode:200
     }
-  }catch(error){
-    return{
-      success: false,message:error}
+  }catch(err){
+    return{success: false,message:err}
   }
 }
