@@ -41,12 +41,12 @@ export default function CartPage() {
   );
 
   async function handleRemoveCart(e: any) {
-    const result = await fetch("http://localhost:3000/api/deleteById", {
-      method:"DELETE",
-      body:JSON.stringify({id:idUser})
+    const result = await fetch("http://localhost:3000/api/update", {
+      method:"PUT",
+      body:JSON.stringify({data:{cart:[]},id:idUser})
     })
     const res=await result.json();
-    console.log(res);
+    localStorage.setItem("user",JSON.stringify({id:idUser,cart:[],location:JSON.parse(localStorage.getItem("user")||"").location}));
   }
 
 

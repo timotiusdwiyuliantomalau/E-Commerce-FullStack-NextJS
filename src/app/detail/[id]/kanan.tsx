@@ -22,8 +22,7 @@ export default function KananDetail(products: any) {
   }, [isLogin]);
 
   async function handleUpdateCart() {
-    dispatch(addToCart({ product, qty }));
-    user.cart.length == 0 && user.cart.push({ product, qty });
+    dispatch(addToCart({ product, qty }))
     let sameProduct = user.cart.find(
       (data: any) => data.product.product_id == product.product_id
     );

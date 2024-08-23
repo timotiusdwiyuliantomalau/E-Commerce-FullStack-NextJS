@@ -28,19 +28,21 @@ export default function TengahDetail(products: any) {
           </p>
         </span>
         <p className="font-bold text-3xl mt-1 mb-6">
-          {product.typical_price_range[0]}
+          {product.typical_price_range==null?"12":product.typical_price_range[0]}
         </p>
 
         <div className="grid gap-4 pb-7 border-b-[2px] border-gray-200 ">
           <span className="text-sm">{productAtt}</span>
           <span className="grid gap-2">
-            {product.product_description
-              .split("-----")
-              .map((detail: any, i: number) => (
+            
+              <p>{product.product_description!=null?
+              product.product_description
+              .split("-----").map((detail: any, i: number) => (
                 <p key={i} className="text-sm">
                   {detail}
                 </p>
-              ))}
+              )):<p>{product.product_description}</p>}</p>
+              
           </span>
         </div>
 
