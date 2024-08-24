@@ -10,9 +10,11 @@ import FixNavbar from "../fragments/content/navbar/fixNavbar";
 import { useAppsSelector } from "../../../../utils/redux/store";
 import { useEffect, useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
+import LocationFormModal from "@/app/Modals/addLocationModal";
 
 export default function NavbarLogin() {
   let [user,setUser] = useState(JSON.parse(localStorage.getItem("user") || ""));
+  const [addLocation,setAddLocation]=useState(false);
   const addToCartSlice = useAppsSelector((state) => state.addToCartSlice);
   const submitLocation=useAppsSelector((state)=>state.action);
   useEffect(() => {
@@ -27,6 +29,7 @@ export default function NavbarLogin() {
     <>
       <FixNavbar>
         <main className="flex gap-8 items-center z-10 ">
+          {addLocation&&<LocationFormModal/>}
           <div className="flex flex-col gap-4 h-full">
             <span className="flex scale-125 gap-2 place-self-end">
               <IoMdNotificationsOutline className="w-6 h-6 opacity-60 hover:opacity-100 cursor-pointer rounded-md text-2xl" />
@@ -45,7 +48,7 @@ export default function NavbarLogin() {
             {!user.location ? (
               <span className="flex gap-1 items-center cursor-pointer">
                 <MdAddLocationAlt />
-                <p className="text-xs">Isi Alamat Dahulu!</p>
+                <p onClick={()=>setAddLocation(true)} className="text-xs">Isi Alamat Dahulu!</p>
               </span>
             ) : (
               <span className="text-xs flex items-center gap-1 cursor-pointer group">

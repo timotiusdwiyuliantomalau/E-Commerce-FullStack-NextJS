@@ -7,7 +7,7 @@ import { action } from "../../../utils/redux/actionSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../utils/redux/store";
 
-export default function locationFormModal() {
+export default function LocationFormModal() {
   const [provinces, setProvinces] = useState(Array);
   const [id, SetId] = useState(Array);
   const [regencies, setRegencies] = useState(Array);
@@ -55,7 +55,7 @@ export default function locationFormModal() {
 
   return (
     <>
-      <div className="pt-[6rem] flex bg-black justify-center min-h-screen bg-opacity-80">
+      <div className="pt-[6rem] z-50 flex bg-black justify-center min-h-screen bg-opacity-80 absolute left-1/2 top-1/4">
         <main className="w-1/3 flex flex-col p-10 bg-white h-full">
           <h1 className="text-2xl font-semibold mb-3 place-self-center">
             Alamat Penerima
