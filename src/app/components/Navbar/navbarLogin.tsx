@@ -7,16 +7,19 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdAddLocationAlt, MdOutlineEmail } from "react-icons/md";
 import { deleteCookie, getCookie } from "../../../../utils/cookies";
 import FixNavbar from "../fragments/content/navbar/fixNavbar";
-import { useAppsSelector } from "../../../../utils/redux/store";
+import { AppDispatch, useAppsSelector } from "../../../../utils/redux/store";
 import { useEffect, useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import LocationFormModal from "@/app/Modals/addLocationModal";
+import { openAddLocation } from "../../../../utils/redux/addLocationSlice";
+import { useDispatch } from "react-redux";
 
 export default function NavbarLogin() {
   let [user,setUser] = useState(JSON.parse(localStorage.getItem("user") || ""));
-  const [addLocation,setAddLocation]=useState(false);
   const addToCartSlice = useAppsSelector((state) => state.addToCartSlice);
   const submitLocation=useAppsSelector((state)=>state.action);
+  const dispatch=useDispatch<AppDispatch>();
+
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user") || ""));
   },[submitLocation])
@@ -29,7 +32,6 @@ export default function NavbarLogin() {
     <>
       <FixNavbar>
         <main className="flex gap-8 items-center z-10 ">
-          {addLocation&&<LocationFormModal/>}
           <div className="flex flex-col gap-4 h-full">
             <span className="flex scale-125 gap-2 place-self-end">
               <IoMdNotificationsOutline className="w-6 h-6 opacity-60 hover:opacity-100 cursor-pointer rounded-md text-2xl" />
@@ -47,8 +49,9 @@ export default function NavbarLogin() {
             </span>
             {!user.location ? (
               <span className="flex gap-1 items-center cursor-pointer">
-                <MdAddLocationAlt />
-                <p onClick={()=>setAddLocation(true)} className="text-xs">Isi Alamat Dahulu!</p>
+                <MdAddLocationAlt className="animate-pulse" />
+                <p onClick={()=>{
+                  dispatch(openAddLocation())}} className="text-xs">Isi Alamat Dahulu!</p>
               </span>
             ) : (
               <span className="text-xs flex items-center gap-1 cursor-pointer group">

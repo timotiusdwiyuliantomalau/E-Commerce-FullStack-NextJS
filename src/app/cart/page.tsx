@@ -8,7 +8,7 @@ import ModalRegister from "../Modals/registerModal";
 import { useAppsSelector } from "../../../utils/redux/store";
 import { Heart, Trash2 } from "react-feather";
 import { getCookie, setCookie } from "../../../utils/cookies";
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import { IoStorefrontSharp } from "react-icons/io5";
 import { useRouter } from "next/navigation";
@@ -22,11 +22,11 @@ export default function CartPage() {
     0
   );
   const [productsCart, setProductsCart] = useState([]);
-  const [listCart, setListCart] = useState(Array);
+  const [listCart, setListCart] = useState<any>(Array);
   const [checkboxChecked, setCheckboxChecked] = useState(false);
-  const router=useRouter();
-  const idUser=JSON.parse(localStorage.getItem("user")||"").id;
-
+  const router = useRouter();
+  const idUser = JSON.parse(localStorage.getItem("user") || "").id;
+  
   useEffect(() => {
     getCookie("isLogin").then((res) => {
       if (res)
@@ -36,19 +36,32 @@ export default function CartPage() {
 
   const priceCart = listCart.reduce(
     (acc: number, curr: any) =>
-      acc + (parseFloat(curr.product.typical_price_range[0].split("$")[1])*curr.qty),
+      acc +
+      parseFloat(curr.product.typical_price_range[0].split("$")[1]) * curr.qty,
     0
   );
 
   async function handleRemoveCart(e: any) {
     const result = await fetch("http://localhost:3000/api/update", {
-      method:"PUT",
-      body:JSON.stringify({data:{cart:[]},id:idUser})
-    })
-    const res=await result.json();
-    localStorage.setItem("user",JSON.stringify({id:idUser,cart:[],location:JSON.parse(localStorage.getItem("user")||"").location}));
+      method: "PUT",
+      body: JSON.stringify({ data: { cart: [] }, id: idUser }),
+    });
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        id: idUser,
+        cart: [],
+        location: JSON.parse(localStorage.getItem("user") || "").location,
+      })
+    );
   }
-
+  const itemDelete =
+    listCart.length > 0 &&
+    productsCart.filter(
+      (data: any, i: number) =>
+        data.product.product_id != listCart[i].product.product_id
+    );
+    console.log(itemDelete);
 
   return (
     <>
@@ -70,9 +83,7 @@ export default function CartPage() {
                         e.target.removeAttribute("id");
                         return setListCart([]);
                       }
-                      setListCart(
-                        productsCart.map((data: any) => data)
-                      );
+                      setListCart(productsCart.map((data: any) => data));
                       e.target.setAttribute("id", 1);
                     }}
                     className={`group absolute w-5 h-5 bg-white top-0 checked:opacity-0 opacity-100 cursor-pointer`}
@@ -85,7 +96,12 @@ export default function CartPage() {
                   </span>
                 </p>
               </span>
-              <p className="font-semibold">Hapus</p>
+              <p
+                onClick={handleRemoveCart}
+                className="font-semibold cursor-pointer"
+              >
+                Hapus
+              </p>
             </div>
 
             <div className="bg-white flex flex-col pt-5 pb-8 px-5 rounded-md -mt-1 gap-7 shadow-md">
@@ -114,7 +130,8 @@ export default function CartPage() {
                               if (
                                 listCart.find(
                                   (items: any) =>
-                                    items.product.product_id == data.product.product_id
+                                    items.product.product_id ==
+                                    data.product.product_id
                                 )
                               )
                                 return setListCart(
@@ -171,10 +188,7 @@ export default function CartPage() {
                                         data.product.product_id
                                     )
                                   )
-                                    return setListCart([
-                                      ...listCart,
-                                      data,
-                                    ]);
+                                    return setListCart([...listCart, data]);
                                 } else if (
                                   e.target.parentElement.parentElement.id ==
                                   "check"
@@ -196,10 +210,7 @@ export default function CartPage() {
                                         data.product.product_id
                                     )
                                   )
-                                    return setListCart([
-                                      ...listCart,
-                                      data,
-                                    ]);
+                                    return setListCart([...listCart, data]);
                                 }
                               }}
                               className="flex items-center absolute  bg-green-600 w-5 h-5 p-1 top-0 text-white"
@@ -217,19 +228,26 @@ export default function CartPage() {
                       width={300}
                       height={300}
                     ></Image>
-                    <Link href={`/detail/${data.product.product_id}`} className="font-medium w-full hover:underline">
+                    <Link
+                      href={`/detail/${data.product.product_id}`}
+                      className="font-medium w-full hover:underline"
+                    >
                       {data.product.product_title}
                     </Link>
                     <span className="grid h-[6rem] justify-between">
                       <p className="font-semibold text-lg text-right">
-                        $ {parseFloat(
+                        ${" "}
+                        {parseFloat(
                           data.product.typical_price_range[0].split("$")[1]
                         ) * data.qty}
                       </p>
                       <span className="flex gap-4 place-self-end items-center text-gray-500 ">
                         <SlNote className="w-5 h-5"></SlNote>
                         <Heart className="w-5 h-5"></Heart>
-                        <Trash2 onClick={handleRemoveCart} className="w-5 h-5"></Trash2>
+                        <Trash2
+                          onClick={handleRemoveCart}
+                          className="w-5 h-5"
+                        ></Trash2>
                         <span className="  flex gap-4 items-center border-[1px] border-gray-300 py-1 px-2 rounded-md">
                           <BiMinus className="hover:bg-gray-200 cursor-pointer rounded-md"></BiMinus>
                           <p className="text-black">{data.qty}</p>
@@ -248,7 +266,9 @@ export default function CartPage() {
               <h1 className="font-semibold text-lg">Rincian Belanja</h1>
               <span className="flex justify-between pb-2 border-b-[1px] border-black border-opacity-40">
                 <p>Total</p>
-                <p className="font-semibold text-lg">$ {priceCart.toString().substring(0,5)}</p>
+                <p className="font-semibold text-lg">
+                  $ {priceCart.toString().substring(0, 5)}
+                </p>
               </span>
             </span>
             <span className="flex justify-between w-full bg-red-100 border-2 border-redP py-3 rounded-md gap-2 items-center cursor-pointer p-4">
@@ -265,12 +285,16 @@ export default function CartPage() {
               <IoIosArrowForward className="text-gray-600" />{" "}
             </span>
             <input
-            type="submit"
+              type="submit"
               onClick={() => {
-                if(listCart.length>0){
-                localStorage.setItem("cartShipment", JSON.stringify(listCart));
-                router.push("/cart/shipment");}else{
-                  alert("Silahkan pilih produk terlebih dahulu")
+                if (listCart.length > 0) {
+                  localStorage.setItem(
+                    "cartShipment",
+                    JSON.stringify(listCart)
+                  );
+                  router.push("/cart/shipment");
+                } else {
+                  alert("Silahkan pilih produk terlebih dahulu");
                 }
               }}
               value={"Beli"}

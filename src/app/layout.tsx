@@ -5,6 +5,7 @@ import StoreProvider from "./storeProvider";
 import { cookies } from "next/headers";
 import Navbar from "./components/Navbar/navbarUnLogin";
 import NavbarLogin from "./components/Navbar/navbarLogin";
+import Router from "./router";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,7 +28,7 @@ export default async function RootLayout({
       <body className={poppins.className}>
         <StoreProvider>
           {typeof isLogin=="undefined"?<Navbar/>:<NavbarLogin/>}
-          {children}
+          <Router></Router>
         </StoreProvider>
       </body>
     </html>

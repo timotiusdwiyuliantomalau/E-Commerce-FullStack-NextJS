@@ -6,6 +6,8 @@ import { updateData } from "../../../utils/firebase/service";
 import { action } from "../../../utils/redux/actionSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../utils/redux/store";
+import { RxCross1 } from "react-icons/rx";
+import { closeAddLocation } from "../../../utils/redux/addLocationSlice";
 
 export default function LocationFormModal() {
   const [provinces, setProvinces] = useState(Array);
@@ -55,9 +57,13 @@ export default function LocationFormModal() {
 
   return (
     <>
-      <div className="pt-[6rem] z-50 flex bg-black justify-center min-h-screen bg-opacity-80 absolute left-1/2 top-1/4">
-        <main className="w-1/3 flex flex-col p-10 bg-white h-full">
-          <h1 className="text-2xl font-semibold mb-3 place-self-center">
+      <div className="z-50 flex bg-black justify-center min-h-screen bg-opacity-80 fixed w-full">
+        <main className="w-1/3 flex flex-col p-10 bg-white pb-12 rounded-lg absolute top-10">
+        <RxCross1
+            onClick={() => dispatch(closeAddLocation())}
+            className="text-2xl place-self-end cursor-pointer hover:bg-gray-200 -mt-3"
+          ></RxCross1>
+          <h1 className="text-2xl font-semibold mb-5 place-self-center">
             Alamat Penerima
           </h1>
           <form className="flex flex-col gap-4" onSubmit={handleSubmitLocation}>
