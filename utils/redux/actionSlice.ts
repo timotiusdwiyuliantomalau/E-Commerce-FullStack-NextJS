@@ -4,7 +4,7 @@ export const actionSlice= createSlice({
     name: "actionSlice",
     initialState: false,
     reducers: {
-        action: (state) => state=true,
+        action: (state) => state=!state,
     },
 })
 export default actionSlice.reducer;

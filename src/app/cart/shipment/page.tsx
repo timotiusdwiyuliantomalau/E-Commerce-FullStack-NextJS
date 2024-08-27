@@ -4,10 +4,11 @@ import Image from "next/image";
 import { GoLocation } from "react-icons/go";
 import { HiRefresh } from "react-icons/hi";
 import { IoIosArrowForward } from "react-icons/io";
-import { MdChangeCircle, MdVerified } from "react-icons/md";
+import { MdVerified } from "react-icons/md";
 
 export default function Shipment() {
   const products = JSON.parse(localStorage.getItem("cartShipment") || "");
+  const user = localStorage.getItem("user")&&JSON.parse(localStorage.getItem("user") || "");
   return (
     <>
       <div className="mt-[9rem] flex flex-col items-center scale-110">
@@ -20,12 +21,11 @@ export default function Shipment() {
               </h2>
               <span className="flex gap-1 items-center ">
                 <GoLocation />
-                <p className="font-semibold">Rumah . Timotius</p>
+                <p className="font-semibold">RUMAH</p>
               </span>
               <span className="flex  justify-between items-start">
                 <p className="w-[27rem]">
-                  Jalan Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Nesciunt saepe sunt voluptate{" "}
+                  {user.location.alamat_lengkap}
                 </p>
                 <span className=" text-white text-sm rounded-md bg-redP p-2 flex gap-1 cursor-pointer group">
                   <HiRefresh className="text-lg group-hover:animate-spin"></HiRefresh>{" "}
@@ -71,7 +71,7 @@ export default function Shipment() {
                         </option>
                       </select>
                     </span>
-                    <p className="text-lg font-semibold">5 x ${data.product.typical_price_range[0].split("$")[1]}</p>
+                    <p className="text-lg font-semibold">{data.qty} x ${data.product.typical_price_range[0].split("$")[1]}</p>
                   </span>
                 </div>
               ))}

@@ -22,11 +22,12 @@ export default function ModalLogin() {
         password: e.target.password.value,
       }),
     });
-    const res = await result.json();
-    setErrorLogin(res.message);
-    if (res.success === true) {
-      localStorage.setItem("user",JSON.stringify({id:res.user[0].id,cart:res.user[0].cart,location:res.user[0].location}))
+    const data = await result.json();
+    setErrorLogin(data.message);
+    if (data.success === true) {
+      
       setCookie("isLogin", "yes", 1000 * 60 * 60).then(res=>{
+        localStorage.setItem("user",JSON.stringify({id:data.user[0].id,cart:data.user[0].cart,location:data.user[0].location}))
         if(res) window.location.href = "/";
       })
     }

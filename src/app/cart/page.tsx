@@ -5,7 +5,7 @@ import { SlNote } from "react-icons/sl";
 import { IoIosArrowForward } from "react-icons/io";
 import ModalLogin from "../Modals/loginModal";
 import ModalRegister from "../Modals/registerModal";
-import { useAppsSelector } from "../../../utils/redux/store";
+import { AppDispatch, useAppsSelector } from "../../../utils/redux/store";
 import { Heart, Trash2 } from "react-feather";
 import { getCookie, setCookie } from "../../../utils/cookies";
 import React, { useEffect, useState } from "react";
@@ -13,6 +13,9 @@ import { FaCheck } from "react-icons/fa";
 import { IoStorefrontSharp } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { action } from "../../../utils/redux/actionSlice";
+import { setCart } from "../../../utils/redux/addToCartSlice";
 
 export default function CartPage() {
   const isLoginModal = useAppsSelector((state) => state.modalSlice.login);
@@ -21,12 +24,13 @@ export default function CartPage() {
     (acc: number, curr: any) => acc + curr.qty,
     0
   );
-  const [productsCart, setProductsCart] = useState([]);
+  const [productsCart, setProductsCart] = useState<any>([]);
   const [listCart, setListCart] = useState<any>(Array);
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const router = useRouter();
   const idUser = JSON.parse(localStorage.getItem("user") || "").id;
-  
+  const dispatch=useDispatch<AppDispatch>()
+
   useEffect(() => {
     getCookie("isLogin").then((res) => {
       if (res)
@@ -42,26 +46,31 @@ export default function CartPage() {
   );
 
   async function handleRemoveCart(e: any) {
-    const result = await fetch("http://localhost:3000/api/update", {
-      method: "PUT",
-      body: JSON.stringify({ data: { cart: [] }, id: idUser }),
-    });
-    localStorage.setItem(
-      "user",
-      JSON.stringify({
-        id: idUser,
-        cart: [],
-        location: JSON.parse(localStorage.getItem("user") || "").location,
-      })
-    );
+    console.log(e.target.id)
+    if(e.target.id.length>0){
+      const items = JSON.parse(localStorage.getItem("user") || "").cart.filter(
+        (item: any) => item.product.product_id!=e.target.id
+      );
+      setProductsCart(items);
+      const result = await fetch("http://localhost:3000/api/update", {
+        method: "PUT",
+        body: JSON.stringify({ data: { cart: items }, id: idUser }),
+      });
+      const res = await result.json();
+      
+      res&&localStorage.setItem(
+        "user",
+        JSON.stringify({
+          id: idUser,
+          cart: items,
+          location: JSON.parse(localStorage.getItem("user") || "").location,
+        })
+      );
+      dispatch(setCart(items));
+    }
+    
+    
   }
-  const itemDelete =
-    listCart.length > 0 &&
-    productsCart.filter(
-      (data: any, i: number) =>
-        data.product.product_id != listCart[i].product.product_id
-    );
-    console.log(itemDelete);
 
   return (
     <>
@@ -96,12 +105,7 @@ export default function CartPage() {
                   </span>
                 </p>
               </span>
-              <p
-                onClick={handleRemoveCart}
-                className="font-semibold cursor-pointer"
-              >
-                Hapus
-              </p>
+              <p className="font-semibold cursor-pointer">Hapus</p>
             </div>
 
             <div className="bg-white flex flex-col pt-5 pb-8 px-5 rounded-md -mt-1 gap-7 shadow-md">
@@ -241,12 +245,12 @@ export default function CartPage() {
                           data.product.typical_price_range[0].split("$")[1]
                         ) * data.qty}
                       </p>
-                      <span className="flex gap-4 place-self-end items-center text-gray-500 ">
-                        <SlNote className="w-5 h-5"></SlNote>
-                        <Heart className="w-5 h-5"></Heart>
-                        <Trash2
-                          onClick={handleRemoveCart}
-                          className="w-5 h-5"
+                      <span className="flex gap-2 place-self-end items-center text-gray-500 ">
+                        <SlNote className="w-8 h-8 p-1 cursor-pointer hover:bg-slate-200 rounded-md"></SlNote>
+                        <Heart className="w-8 h-8 p-1 cursor-pointer hover:bg-slate-200 rounded-md"></Heart>
+                        <Trash2 onClick={handleRemoveCart}
+                          id={data.product.product_id}
+                          className="w-8 h-8 p-1 cursor-pointer hover:bg-slate-200 rounded-md "
                         ></Trash2>
                         <span className="  flex gap-4 items-center border-[1px] border-gray-300 py-1 px-2 rounded-md">
                           <BiMinus className="hover:bg-gray-200 cursor-pointer rounded-md"></BiMinus>
@@ -287,7 +291,12 @@ export default function CartPage() {
             <input
               type="submit"
               onClick={() => {
-                if (listCart.length > 0) {
+                if (
+                  JSON.parse(localStorage.getItem("user") || "").location ==
+                  null
+                ) {
+                  alert("Silahkan isi alamat dahulu!");
+                } else if (listCart.length > 0) {
                   localStorage.setItem(
                     "cartShipment",
                     JSON.stringify(listCart)

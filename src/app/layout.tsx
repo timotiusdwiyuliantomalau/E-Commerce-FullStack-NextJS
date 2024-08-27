@@ -28,7 +28,8 @@ export default async function RootLayout({
       <body className={poppins.className}>
         <StoreProvider>
           {typeof isLogin=="undefined"?<Navbar/>:<NavbarLogin/>}
-          <Router></Router>
+          <Router/>
+          {children}
         </StoreProvider>
       </body>
     </html>

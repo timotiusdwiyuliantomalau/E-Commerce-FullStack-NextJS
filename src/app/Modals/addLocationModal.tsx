@@ -32,27 +32,26 @@ export default function LocationFormModal() {
 
   async function handleSubmitLocation(e: any) {
     e.preventDefault();
+    const location:any= {location : {
+      provinsi: e.target.provinsi.value,
+      kota_kab: e.target.kota_kab.value,
+      kecamatan: e.target.kecamatan.value,
+      kode_pos: e.target.kode_pos.value,
+      alamat_lengkap: e.target.alamat_lengkap.value,}}
     const result = await fetch("http://localhost:3000/api/update", {
       method: "PUT",
       body: JSON.stringify({
         id: user.id,
-        data: {
-          location: {
-            provinsi: e.target.provinsi.value,
-            kota_kab: e.target.kota_kab.value,
-            kecamatan: e.target.kecamatan.value,
-            kode_pos: e.target.kode_pos.value,
-            alamat_lengkap: e.target.alamat_lengkap.value,
-          },
-        },
+        data: location,
       }),
     });
     const res = await result.json();
     localStorage.setItem(
       "user",
-      JSON.stringify({ id: user.id, cart: user.cart, location: res.data })
+      JSON.stringify({ id: user.id, cart: user.cart, location:location.location })
     );
-    dispatch(action())
+    dispatch(action());
+    dispatch(closeAddLocation());
   }
 
   return (
@@ -167,7 +166,7 @@ export default function LocationFormModal() {
               </label>
               <span>:</span>
               <input
-                className="w-20 border-[1px] border-gray-400 rounded-md"
+                className="w-20 border-[1px] border-gray-400 rounded-md text-center"
                 pattern="[0-9]+"
                 required
                 name="kode_pos"

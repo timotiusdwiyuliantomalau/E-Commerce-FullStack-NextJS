@@ -42,7 +42,6 @@ export default function KananDetail(products: any) {
         data: { cart: user.cart },
       }),
     });
-    console.log(user.cart);
     const res = await result.json();
     localStorage.setItem("user", JSON.stringify({id:user.id,cart:user.cart,location:user.location}));
   }
