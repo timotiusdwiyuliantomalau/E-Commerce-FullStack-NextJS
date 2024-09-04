@@ -13,7 +13,7 @@ export default function ForYou() {
     <>
       <main className="w-full ">
         <h1 className="text-left text-2xl font-semibold w-full mb-7">
-          For You
+          Untuk Anda
         </h1>
         <div className="flex gap-8 flex-wrap">
           {arrProducts &&
@@ -21,7 +21,7 @@ export default function ForYou() {
               products.data?.map((product: any, i: number) => (
                 <span
                   key={i}
-                  className="flex flex-col rounded-lg  w-[11rem] pb-5 border-2 border-gray-200 cursor-pointer group"
+                  className="flex flex-col rounded-lg  w-[11rem] pb-5 border-2 border-gray-200 cursor-pointer group hover:scale-110"
                 >
                   <Image
                     className="h-[11rem] group rounded-lg rounded-br-[2.5em] bg-blue-900 object-cover object-center"
