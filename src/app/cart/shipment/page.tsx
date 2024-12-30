@@ -36,7 +36,7 @@ export default function Shipment() {
 
             {products.length > 0 &&
               products.map((data: any, i: number) => (
-                <div className="flex flex-col relative p-6 shadow-md rounded-lg border-[1px] border-gray-200">
+                <div key={i} className="flex flex-col relative p-6 shadow-md rounded-lg border-[1px] border-gray-200">
                   <h2 className="text-slate-600 font-semibold mb-1 text-lg ">
                     PESANAN {i + 1}
                   </h2>
