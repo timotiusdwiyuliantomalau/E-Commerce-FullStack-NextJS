@@ -1,13 +1,18 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BsFillStarFill } from "react-icons/bs";
 import { GoVerified } from "react-icons/go";
 export default function ForYou() {
-  const arrProducts =
-    localStorage.getItem("products") &&
-    JSON.parse(localStorage.getItem("products") || "");
+  const [arrProducts, setArrProducts] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const products = localStorage.getItem("products");
+      setArrProducts(products ? JSON.parse(products) : []);
+    }
+  }, []);
 
   return (
     <>

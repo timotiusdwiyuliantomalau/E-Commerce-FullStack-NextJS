@@ -1,9 +1,15 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+const initialState = (() => {
+  if (typeof window !== "undefined") {
+    const user = localStorage.getItem("user");
+    return user ? JSON.parse(user).cart || [] : [];
+  }
+  return []; // Nilai default untuk server-side
+})();
 export const addToCartSlice = createSlice({
   name: "addToCart",
-  initialState: JSON.parse(localStorage.getItem("user") || "[]").cart?JSON.parse(localStorage.getItem("user") || "[]").cart:[],
+  initialState: initialState,
   reducers: {
     addToCart: (state:Array<any>, action: PayloadAction<object>) => {
       state.push(action.payload);
