@@ -40,7 +40,7 @@ export default function ForYou() {
                     <p className="text-lg font-semibold mb-1">
                       {product.typical_price_range != null
                         ? product.typical_price_range[0]
-                        : "$32"}
+                        : "$23"}
                     </p>
                     <span className="flex gap-1 mb-1 items-center overflow-hidden">
                       <GoVerified className="text-blue-400 w-4 h-4"></GoVerified>
