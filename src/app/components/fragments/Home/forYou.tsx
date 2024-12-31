@@ -4,14 +4,17 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { BsFillStarFill } from "react-icons/bs";
 import { GoVerified } from "react-icons/go";
+import { dataProducts } from "../../../../../utils/fetchData";
 export default function ForYou() {
   const [arrProducts, setArrProducts] = useState<any[]>([]);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const products = localStorage.getItem("products");
-      setArrProducts(products ? JSON.parse(products) : []);
-    }
+    localStorage.getItem("products") != null
+      ? localStorage.getItem("products")
+      : dataProducts((res: any) => {
+          localStorage.setItem("products", JSON.stringify(res));
+          setArrProducts(res);
+        });
   }, []);
 
   return (
